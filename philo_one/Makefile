@@ -6,7 +6,7 @@
 #    By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/16 14:51:18 by julnolle          #+#    #+#              #
-#    Updated: 2020/08/16 15:02:15 by julnolle         ###   ########.fr        #
+#    Updated: 2020/08/16 16:37:04 by julnolle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,10 +50,12 @@ endif
 
 # ---------------- COL --------------- #
 
-_RED		= \033[1;31m
-_GREEN		= \033[1;32m
-_YELLOW		= \033[1;33m
 _END		= \033[0m
+_BOLD		= \033[1m
+
+_RED		= \033[31m
+_GREEN		= \033[32m
+_YELLOW		= \033[33m
 
 # ---------------- SRC --------------- #
 
@@ -62,6 +64,7 @@ _END		= \033[0m
 
 # Main Sources
 SRCS += main.c
+SRCS += ft_utils.c
 
 vpath %.c ./
 
@@ -85,25 +88,25 @@ fast:
 
 $(NAME):	$(OBJS)
 			$(CC) $(CFLAGS) $(OBJS) $(ALL_INC) -o $@
-			@echo "$(_BOLD)$(_YELLOW)==> $@ linked$(_END)"
+			echo "$(_BOLD)$(_YELLOW)==> $@ linked$(_END)"
 
 $(OBJS): 	$(DIR_OBJS)%.o: %.c $(HEAD) Makefile | $(DIR_OBJS)
 			$(CC) $(CFLAGS) $(ENV) -c $< -o $@ $(ALL_INC)
-			@echo "$(_BOLD)$(_GREEN)--> $@ made$(_END)"
+			echo "$(_BOLD)$(_GREEN)--> $@ made$(_END)"
 
 $(DIR_OBJS):
 	mkdir -p $@
 
 clean:
 	$(RM) -R $(DIR_OBJS)
-	@echo "$(_BOLD)$(_RED)-> $@ made$(_END)"
+	echo "$(_BOLD)$(_RED)-> $@ $(NAME) made$(_END)"
 
 fclean: clean
 	$(RM) $(NAME)
-	@echo "$(_BOLD)$(_RED)-> $@ made$(_END)"
+	echo "$(_BOLD)$(_RED)-> $@ $(NAME) made$(_END)"
 
 re: fclean
 	$(MAKE)
 
-.PHONY:		all clean fclean re bonus
-.SILENT:	$(OBJS) $(DIR_OBJS) $(NAME)
+.PHONY:		all fast clean fclean re
+.SILENT:
