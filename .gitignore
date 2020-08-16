@@ -1,0 +1,9 @@
+a.out
+a.out.dSYM
+a.out.dSYM/*
+.DS_Store
+*.o
+test*
+*.swp
+debug*
+valgrind_log
