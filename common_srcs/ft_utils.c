@@ -6,11 +6,11 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 16:32:59 by julnolle          #+#    #+#             */
-/*   Updated: 2020/08/16 16:38:26 by julnolle         ###   ########.fr       */
+/*   Updated: 2020/08/18 12:10:08 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_one.h"
 
 int		ft_atoi(const char *str)
 {

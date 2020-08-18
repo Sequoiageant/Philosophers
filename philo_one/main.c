@@ -6,11 +6,11 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 12:24:12 by julnolle          #+#    #+#             */
-/*   Updated: 2020/08/16 17:01:16 by julnolle         ###   ########.fr       */
+/*   Updated: 2020/08/18 12:09:22 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_one.h"
 #include <stdio.h>
 
 void	philo_one(char const **av)

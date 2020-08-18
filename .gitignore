@@ -6,8 +6,8 @@ a.out.dSYM/*
 test*
 *.swp
 debug*
-philo*
-!philo_one/
-!philo_two/
-!philo_three/
+# philo*
+# !philo_one/
+# !philo_two/
+# !philo_three/
 valgrind_log

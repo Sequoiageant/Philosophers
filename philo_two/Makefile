@@ -6,7 +6,7 @@
 #    By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/13 14:56:19 by julnolle          #+#    #+#              #
-#    Updated: 2020/08/16 15:48:43 by julnolle         ###   ########.fr        #
+#    Updated: 2020/08/18 12:27:25 by julnolle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,8 +64,10 @@ _YELLOW		= \033[33m
 
 # Main Sources
 SRCS += main.c
+SRCS += ft_utils.c
 
 vpath %.c ./
+vpath %.c ../common_srcs/
 
 # ---------------- INC --------------- #
 

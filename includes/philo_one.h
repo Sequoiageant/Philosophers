@@ -1,35 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   philo_one.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/16 12:24:12 by julnolle          #+#    #+#             */
-/*   Updated: 2020/08/18 12:28:21 by julnolle         ###   ########.fr       */
+/*   Created: 2020/08/18 11:51:48 by julnolle          #+#    #+#             */
+/*   Updated: 2020/08/18 12:22:33 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef PHILO_ONE_H
+# define PHILO_ONE_H
+
 #include "philo.h"
 
-void	philo_two(char const **av)
-{
-	size_t	i;
+/*
+** --------------------------------- Defines ---------------------------------
+*/
 
-	i = 1;
-	while (av[i])
-	{
-		ft_putendl(av[i]);
-		i++;
-	}
-}
 
-int		main(int ac, char const **av)
+/*
+** -------------------------------- Structures -------------------------------
+*/
+
+typedef struct		s_data
 {
-	ft_putendl("MAIN PHILO_TWO");
-	if (ac == 5)
-		philo_two(av);
-	else
-		ft_putendl("Wrong nbr of arguments");
-	return (0);
-}
+	int				var;
+	pthread_mutex_t mutex;
+}					t_data;
+
+/*
+** -------------------------------- Prototypes -------------------------------
+*/
+
+#endif

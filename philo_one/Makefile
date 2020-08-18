@@ -6,7 +6,7 @@
 #    By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/16 14:51:18 by julnolle          #+#    #+#              #
-#    Updated: 2020/08/16 16:37:04 by julnolle         ###   ########.fr        #
+#    Updated: 2020/08/18 12:25:49 by julnolle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,12 +67,14 @@ SRCS += main.c
 SRCS += ft_utils.c
 
 vpath %.c ./
+vpath %.c ../common_srcs/
 
 # ---------------- INC --------------- #
 
 INCLUDES 	=	../includes/
-HEAD 		= $(INCLUDES)philo.h
+HEADER 		= $(INCLUDES)philo_one.h
 ALL_INC		=  -I$(INCLUDES)
+LIB_LINK	= -lpthread
 
 # ---------------- OBJ --------------- #
 
@@ -87,10 +89,10 @@ fast:
 	$(MAKE) re -j8
 
 $(NAME):	$(OBJS)
-			$(CC) $(CFLAGS) $(OBJS) $(ALL_INC) -o $@
+			$(CC) $(CFLAGS) $(OBJS) $(ALL_INC) $(LIB_LINK) -o $@
 			echo "$(_BOLD)$(_YELLOW)==> $@ linked$(_END)"
 
-$(OBJS): 	$(DIR_OBJS)%.o: %.c $(HEAD) Makefile | $(DIR_OBJS)
+$(OBJS): 	$(DIR_OBJS)%.o: %.c $(HEADER) Makefile | $(DIR_OBJS)
 			$(CC) $(CFLAGS) $(ENV) -c $< -o $@ $(ALL_INC)
 			echo "$(_BOLD)$(_GREEN)--> $@ made$(_END)"
 
