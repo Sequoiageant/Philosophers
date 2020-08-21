@@ -6,7 +6,7 @@
 #    By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/16 14:51:18 by julnolle          #+#    #+#              #
-#    Updated: 2020/08/18 12:25:49 by julnolle         ###   ########.fr        #
+#    Updated: 2020/08/20 16:02:04 by julnolle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,7 @@ _YELLOW		= \033[33m
 # SRCS += debug.c
 
 # Main Sources
-SRCS += main.c
+SRCS += main2.c
 SRCS += ft_utils.c
 
 vpath %.c ./
@@ -111,4 +111,4 @@ re: fclean
 	$(MAKE)
 
 .PHONY:		all fast clean fclean re
-.SILENT:
+.SILENT:	$(NAME) $(OBJS) $(DIR_OBJS) clean fclean
