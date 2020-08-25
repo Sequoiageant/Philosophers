@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 14:47:17 by julnolle          #+#    #+#             */
-/*   Updated: 2020/08/17 18:57:55 by julnolle         ###   ########.fr       */
+/*   Updated: 2020/08/19 10:42:41 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PHILO_H
 
 # include <unistd.h>
+# include <stdlib.h>
 # include <pthread.h>
 
 /*
@@ -26,25 +27,41 @@
 # define FALSE		0
 
 # define ARG_NB		5
-# define NB			"number_of_philosophers: "
+# define NB			"number_of_forks & philosophers: "
 # define DIE_T		"time_to_die: "
 # define EAT_T		"time_to_eat: "
 # define SLEEP_T	"time_to_sleep: "
 # define MEAL_NB	"number_of_time_each_philosophers_must_eat: "
 
 /*
+** ---- Philosophe state -----
+*/
+# define EAT_MASK	0x000001
+# define SLEEP_MASK	0x000002
+# define THINK_MASK	0x000004
+
+
+/*
 ** -------------------------------- Structures -------------------------------
 */
 
-typedef struct		s_philosophers
+typedef struct		s_data
 {
-	int		nb;
-	int		die_t;
-	int		eat_t;
-	int		sleep_t;
-	int		meal_nb;
-}					t_philo;
+	pthread_mutex_t	*fork;
+	int				nb;
+	int				selected_philo;
+	int				die_t;
+	int				eat_t;
+	int				sleep_t;
+	int				meal_nb;
+}					t_data;
 
+/*typedef struct		s_philo
+{
+	int		num;
+	int		state;
+}					t_philo;
+*/
 /*
 ** ----------------------------- Common prototypes ----------------------------
 */

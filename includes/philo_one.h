@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 11:51:48 by julnolle          #+#    #+#             */
-/*   Updated: 2020/08/18 12:22:33 by julnolle         ###   ########.fr       */
+/*   Updated: 2020/08/18 16:33:34 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@
 ** -------------------------------- Structures -------------------------------
 */
 
-typedef struct		s_data
+typedef struct		s_mutex
 {
 	int				var;
 	pthread_mutex_t mutex;
-}					t_data;
+}					t_mutex;
 
 /*
 ** -------------------------------- Prototypes -------------------------------
