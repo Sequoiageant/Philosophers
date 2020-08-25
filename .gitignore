@@ -3,7 +3,7 @@ a.out.dSYM
 a.out.dSYM/*
 .DS_Store
 *.o
-test*
+# test*
 *.swp
 debug*
 # philo*
