@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 14:47:17 by julnolle          #+#    #+#             */
-/*   Updated: 2020/08/25 15:25:29 by julnolle         ###   ########.fr       */
+/*   Updated: 2020/08/25 18:34:37 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@
 
 /*
 ** ---- Philosophe state -----
-*/
 # define EAT_MASK	0x000001
 # define SLEEP_MASK	0x000002
 # define THINK_MASK	0x000004
+*/
 
 
 /*
@@ -50,10 +50,11 @@ typedef struct		s_data
 {
 	pthread_mutex_t	*fork;
 	time_t			start_time;
+	time_t			*last_meal_time;
 	int				nb;
 	int				selected_philo;
-	int				die_t;
-	int				eat_t;
+	time_t			die_t;
+	time_t			eat_t;
 	int				sleep_t;
 	int				meal_nb;
 }					t_data;

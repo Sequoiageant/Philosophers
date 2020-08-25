@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main2.c                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 12:24:12 by julnolle          #+#    #+#             */
-/*   Updated: 2020/08/25 16:50:40 by julnolle         ###   ########.fr       */
+/*   Updated: 2020/08/25 19:46:40 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ time_t	get_time_in_ms(time_t start)
 
 void	ft_eat(int id, t_data *data)
 {
-	printf("%6ld ms: Philo [%d] is eating %dms\n", get_time_in_ms(data->start_time), id, data->eat_t);
+	data->last_meal_time[id - 1] = get_time_in_ms(data->start_time);
+	printf("%6ld ms: Philo [%d] is eating %ldms\n", get_time_in_ms(data->start_time), id, data->eat_t);
 	usleep(data->eat_t * 1000);
 }
 
@@ -52,7 +53,8 @@ void *thread_philo(void *arg)
 	id = data->selected_philo;
 	right = id - 1;
 	left = (right + 1) > data->nb - 1 ? 0 : (right + 1);
-	while (1)
+
+	while (1 && (get_time_in_ms(data->start_time) - data->last_meal_time[id - 1] < data->die_t))
 	{
 
 		if (pthread_mutex_lock(&data->fork[right]) != 0)
@@ -69,18 +71,19 @@ void *thread_philo(void *arg)
 			ft_putendl("mutex unlock failed");
 		printf("%6ld ms: Philo [%d] released right fork [%d]\n", get_time_in_ms(data->start_time), id, left);
 		ft_sleep(id, data);
+		printf("last_meal_time of philo %d: %ldms\n", id, data->last_meal_time[id - 1]);
 		ft_think(id, data);
 	}
-
-    /* Pour enlever le warning */
-	pthread_exit(NULL);
+	return (&data->last_meal_time[id - 1]);
 }
 
 int	 philo_one(t_data *data)
 {
-	pthread_t	thread[data->nb];
+	pthread_t	thread[data->nb - 1];
 	int			i;
-	
+	int			*thread_return;
+
+	thread_return = NULL;
 	i = 0;
 	while (i < data->nb)
 	{
@@ -96,6 +99,7 @@ int	 philo_one(t_data *data)
 	while (i < data->nb)
 	{
 		// pthread_mutex_init(&data->fork[i], NULL);
+		printf("creating thread %d\n", i);
 		data->selected_philo = i + 1;
 		if (pthread_create(&thread[i], NULL, thread_philo, data))
 		{
@@ -108,11 +112,13 @@ int	 philo_one(t_data *data)
 	i = 0;
 	while (i < data->nb)
 	{
-		if (pthread_join(thread[i], NULL))
+		if (pthread_join(thread[i], (void **)&thread_return))
 		{
 			ft_putendl("pthread_join failed");
 			return (FAILURE);
 		}
+		printf("The Philosopher [%d] died at %ldms, last meal at: %d\n", data->selected_philo, get_time_in_ms(data->start_time), *thread_return);
+		return (FAILURE);
 		i++;
 	}
 	i = 0;	
@@ -130,12 +136,24 @@ int	 philo_one(t_data *data)
 
 int		ft_philo_test(t_data *data)
 {
+	int	i;
+
 	data->fork = NULL;
+	data->last_meal_time = NULL;
 	if (data->nb > 0)
 	{
 		data->fork = malloc(sizeof(pthread_mutex_t) * data->nb);
-		if (data->fork)
+		data->last_meal_time = malloc(sizeof(time_t) * data->nb);
+		if (data->fork && data->last_meal_time)
+		{
+			i = 0;
+			while (i < data->nb)
+			{
+				data->last_meal_time[i] = data->start_time;
+				i++;
+			}
 			return (SUCCESS);
+		}
 	}
 	return (FAILURE);
 }
@@ -171,6 +189,18 @@ void	print_args(char const **av)
 	ft_putendl("==== end settings ====\n");
 }
 
+void	print_meal_time(t_data data)
+{
+	int	i;
+
+	i = 0;
+	while(i < data.nb)
+	{
+		printf("meal_time: %ld\n", data.last_meal_time[i]);
+		i++;
+	}
+}
+
 int		main(int ac, char const **av)
 {
 	t_data	data;
@@ -179,6 +209,7 @@ int		main(int ac, char const **av)
 	{
 		if (ft_init(&data, av, ac) == SUCCESS)
 		{
+			print_meal_time(data);
 			print_args(av);
 			philo_one(&data);
 		}
