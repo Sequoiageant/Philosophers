@@ -6,7 +6,7 @@
 #    By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/16 14:51:18 by julnolle          #+#    #+#              #
-#    Updated: 2020/08/25 18:36:15 by julnolle         ###   ########.fr        #
+#    Updated: 2020/08/26 11:36:18 by julnolle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,12 +59,14 @@ _YELLOW		= \033[33m
 
 # ---------------- SRC --------------- #
 
-# Debug Sources
-# SRCS += debug.c
+# Common Sources
+SRCS += ft_utils.c
+SRCS += philo_utils.c
 
 # Main Sources
 SRCS += main.c
-SRCS += ft_utils.c
+SRCS += philo_one_utils.c
+SRCS += philo_one_states.c
 
 vpath %.c ./
 vpath %.c ../common_srcs/

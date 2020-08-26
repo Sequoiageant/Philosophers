@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 14:47:17 by julnolle          #+#    #+#             */
-/*   Updated: 2020/08/25 18:34:37 by julnolle         ###   ########.fr       */
+/*   Updated: 2020/08/26 17:51:25 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <string.h>
 # include <pthread.h>
 # include <sys/time.h>
+// # include <stdio.h>
 
 /*
 ** --------------------------------- Defines ---------------------------------
@@ -46,32 +48,24 @@
 ** -------------------------------- Structures -------------------------------
 */
 
-typedef struct		s_data
-{
-	pthread_mutex_t	*fork;
-	time_t			start_time;
-	time_t			*last_meal_time;
-	int				nb;
-	int				selected_philo;
-	time_t			die_t;
-	time_t			eat_t;
-	int				sleep_t;
-	int				meal_nb;
-}					t_data;
-
 /*typedef struct		s_philo
 {
 	int		num;
 	int		state;
 }					t_philo;
 */
+
 /*
 ** ----------------------------- Common prototypes ----------------------------
 */
 
 int		ft_atoi(const char *str);
 size_t	ft_strlen(const char *str);
+int		ft_putchar(char c);
 int		ft_putstr(char const *s);
 int		ft_putendl(char const *s);
+void	ft_putnbr(long n);
+void	print_args(char const **av);
+time_t	get_time_in_ms(time_t start);
 
 #endif

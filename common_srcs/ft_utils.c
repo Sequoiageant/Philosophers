@@ -6,11 +6,11 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 16:32:59 by julnolle          #+#    #+#             */
-/*   Updated: 2020/08/18 12:10:08 by julnolle         ###   ########.fr       */
+/*   Updated: 2020/08/26 11:25:55 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_one.h"
+#include "philo.h"
 
 int		ft_atoi(const char *str)
 {
@@ -55,4 +55,20 @@ int		ft_putendl(char const *s)
 	if (write(1, s, ft_strlen(s)) == FAILURE)
 		return (FAILURE);
 	return ((int)write(1, "\n", 1));
+}
+
+void	print_args(char const **av)
+{
+	size_t		i;
+	static char	*args[ARG_NB] = {NB, DIE_T, EAT_T, SLEEP_T, MEAL_NB};
+
+	ft_putendl("====== settings ======");
+	i = 1;
+	while (av[i])
+	{
+		ft_putstr(args[i - 1]);
+		ft_putendl(av[i]);
+		i++;
+	}
+	ft_putendl("==== end settings ====\n");
 }
