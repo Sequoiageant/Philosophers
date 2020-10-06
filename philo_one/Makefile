@@ -6,7 +6,7 @@
 #    By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/16 14:51:18 by julnolle          #+#    #+#              #
-#    Updated: 2020/08/26 11:36:18 by julnolle         ###   ########.fr        #
+#    Updated: 2020/10/05 17:25:54 by julnolle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ _YELLOW		= \033[33m
 # Common Sources
 SRCS += ft_utils.c
 SRCS += philo_utils.c
+SRCS += death_check.c
 
 # Main Sources
 SRCS += main.c

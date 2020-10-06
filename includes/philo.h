@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 14:47:17 by julnolle          #+#    #+#             */
-/*   Updated: 2020/08/26 17:51:25 by julnolle         ###   ########.fr       */
+/*   Updated: 2020/10/05 18:32:24 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define FAILURE	-1
 # define TRUE		1
 # define FALSE		0
+# define UNSET		-1
 
 # define ARG_NB		5
 # define NB			"number_of_forks & philosophers: "
@@ -64,8 +65,9 @@ size_t	ft_strlen(const char *str);
 int		ft_putchar(char c);
 int		ft_putstr(char const *s);
 int		ft_putendl(char const *s);
+int		ft_putendl_fd(char const *s, int fd);
 void	ft_putnbr(long n);
 void	print_args(char const **av);
-time_t	get_time_in_ms(time_t start);
+time_t	get_time_in_ms();
 
 #endif

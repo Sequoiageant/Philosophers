@@ -6,25 +6,32 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 11:34:58 by julnolle          #+#    #+#             */
-/*   Updated: 2020/08/26 17:42:50 by julnolle         ###   ########.fr       */
+/*   Updated: 2020/10/05 18:27:59 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-time_t	get_time_in_ms(time_t start)
+time_t	get_time_in_ms()
 {
 	struct timeval	tv;
-	time_t			time_ms;
 
 	gettimeofday(&tv, NULL);
-	time_ms = (tv.tv_sec * 1000 + tv.tv_usec / 1000) - start;
-	return (time_ms);
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
 
 int		ft_putchar(char c)
 {
 	return ((int)write(1, &c, 1));
+}
+
+int	ft_putendl_fd(char const *s, int fd)
+{
+	if (!s)
+		return (FAILURE);
+	if (write(fd, s, ft_strlen(s)) == FAILURE)
+		return (FAILURE);
+	return ((int)write(1, "\n", 1));
 }
 
 void	ft_putnbr(long n)
