@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 11:51:48 by julnolle          #+#    #+#             */
-/*   Updated: 2020/10/05 18:33:02 by julnolle         ###   ########.fr       */
+/*   Updated: 2020/10/06 17:50:36 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ int		ft_init(t_data *data, char const **av, int ac);
 void	ft_eat(int id, t_data *data);
 void	ft_think(int id, t_data *data);
 void	ft_sleep(int id, t_data *data);
-int		ft_print_state(int id, const char *action, t_data *data);
+int		ft_print_state(int id, char *action, t_data *data);
+int		ft_print_death(int id, t_data *data);
 int		ft_create_death_thread(t_data *data);
 
 #endif

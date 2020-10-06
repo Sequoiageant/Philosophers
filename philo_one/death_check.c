@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 11:20:45 by julnolle          #+#    #+#             */
-/*   Updated: 2020/10/06 11:26:31 by julnolle         ###   ########.fr       */
+/*   Updated: 2020/10/06 17:35:00 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,10 @@ void	*d_thread(void *arg)
 			if (elapsed_time > data->die_t)
 			{
 				data->stop = TRUE;
-				ft_putnbr(elapsed_time);
-				ft_putnbr(i + 1);
-				ft_putendl(" DEAD");
+				ft_print_death(i + 1, data);
+				// ft_putnbr(elapsed_time);
+				// ft_putnbr(i + 1);
+				// ft_putendl(" DEAD");
 				return (NULL);
 			}
 			i++;

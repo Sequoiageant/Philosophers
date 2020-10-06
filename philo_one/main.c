@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 12:24:12 by julnolle          #+#    #+#             */
-/*   Updated: 2020/10/06 11:09:34 by julnolle         ###   ########.fr       */
+/*   Updated: 2020/10/06 17:52:05 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ void *thread_philo(void *arg)
 			ft_putendl("mutex lock failed");
 			return (NULL);
 		}
-		ft_print_state(id, "has taken right fork", data);
+		ft_print_state(id, " has taken right fork", data);
 		if (pthread_mutex_lock(&data->fork[left]) != 0)
 		{
 			ft_putendl("mutex lock failed");
 			return (NULL);
 		}
-		ft_print_state(id, "has taken left fork", data);
+		ft_print_state(id, " has taken left fork", data);
 		ft_eat(id, data);
 		if (pthread_mutex_unlock(&data->fork[right]) != 0)
 		{
@@ -53,13 +53,8 @@ void *thread_philo(void *arg)
 			ft_putendl("mutex unlock failed");
 			return (NULL);
 		}
-		if (data->stop)
-		{
-			ft_print_state(id, "died", data);
-			return (NULL);
-		}
 		ft_sleep(id, data);
-		ft_print_state(id, "is thinking", data);
+		ft_print_state(id, " is thinking", data);
 	}
 	return (NULL);
 }
