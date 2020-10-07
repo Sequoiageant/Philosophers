@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 14:47:17 by julnolle          #+#    #+#             */
-/*   Updated: 2020/10/07 16:00:13 by julnolle         ###   ########.fr       */
+/*   Updated: 2020/10/07 18:02:24 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@
 # define EAT_T		"time_to_eat (ms): "
 # define SLEEP_T	"time_to_sleep (ms): "
 # define MEAL_NB	"number_of_time_each_philosophers_must_eat: "
+
+# define USLEEP_DELAY 500
 
 /*
 ** ---- Philosophe state -----

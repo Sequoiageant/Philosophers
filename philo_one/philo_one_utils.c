@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 11:12:56 by julnolle          #+#    #+#             */
-/*   Updated: 2020/10/07 16:13:30 by julnolle         ###   ########.fr       */
+/*   Updated: 2020/10/07 18:13:36 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,17 @@ int		ft_print_state(int id, char *action, t_data *data)
 	free (p_id);
 	free (output);
 	return (SUCCESS);
+}
+
+void	ft_wait(int delay_ms, int stop)
+{
+	long int	start_sleep;
+
+	if (stop == TRUE)
+		return ;
+	start_sleep = get_time_in_ms();
+	while (get_time_in_ms() - start_sleep < delay_ms)
+	{
+		usleep(USLEEP_DELAY);
+	}
 }
