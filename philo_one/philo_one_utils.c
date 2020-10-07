@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 11:12:56 by julnolle          #+#    #+#             */
-/*   Updated: 2020/10/07 12:22:33 by julnolle         ###   ########.fr       */
+/*   Updated: 2020/10/07 16:13:30 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,51 +57,28 @@ int		ft_print_state(int id, char *action, t_data *data)
 	char	*p_id;
 	char	*output;
 
-	if (data->stop != TRUE)
-	{
-		if (pthread_mutex_lock(&data->display) != 0)
-		{
-			ft_putendl("mutex lock failed");
-			return (FAILURE);
-		}
-		output = ft_itoa(get_time_in_ms() - data->start_time);
-		p_id = ft_itoa(id);
-		ft_strjoin_back(" ", &output);
-		ft_strjoin_back(p_id, &output);
-		ft_strjoin_back(action, &output);
-		ft_putendl(output);
-		free (p_id);
-		p_id = NULL;
-		free (output);
-		output = NULL;
-		// ft_putnbr(get_time_in_ms() - data->start_time);
-		
-		// ft_putchar(' ');
-		// ft_putnbr(id);
-		// ft_putendl(action);
-		if (pthread_mutex_unlock(&data->display) != 0)
-		{
-			ft_putendl("mutex unlock failed");
-			return (FAILURE);
-		}
-	}
-	return (SUCCESS);
-}
-int		ft_print_death(int id, t_data *data)
-{
 	if (pthread_mutex_lock(&data->display) != 0)
 	{
 		ft_putendl("mutex lock failed");
 		return (FAILURE);
 	}
-	ft_putnbr(get_time_in_ms() - data->start_time);
-	ft_putchar(' ');
-	ft_putnbr(id);
-	ft_putendl(" died");
+	if (data->stop == TRUE)
+	{
+		pthread_mutex_unlock(&data->display);
+		return (SUCCESS);
+	}
+	output = ft_itoa(get_time_in_ms() - data->start_time);
+	p_id = ft_itoa(id);
+	ft_strjoin_back(" ", &output);
+	ft_strjoin_back(p_id, &output);
+	ft_strjoin_back(action, &output);
+	ft_putendl(output);
 	if (pthread_mutex_unlock(&data->display) != 0)
 	{
 		ft_putendl("mutex unlock failed");
 		return (FAILURE);
 	}
+	free (p_id);
+	free (output);
 	return (SUCCESS);
 }

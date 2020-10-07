@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 12:24:12 by julnolle          #+#    #+#             */
-/*   Updated: 2020/10/07 12:07:46 by julnolle         ###   ########.fr       */
+/*   Updated: 2020/10/07 15:35:58 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void *thread_philo(void *arg)
 	id = data->selected_philo;
 	right = id - 1;
 	left = (right + 1) > data->nb - 1 ? 0 : (right + 1);
-
 	while (data->stop == FALSE)
 	{
 		if (pthread_mutex_lock(&data->fork[right]) != 0)

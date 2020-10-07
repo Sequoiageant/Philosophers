@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 16:32:59 by julnolle          #+#    #+#             */
-/*   Updated: 2020/08/26 11:25:55 by julnolle         ###   ########.fr       */
+/*   Updated: 2020/10/07 15:59:56 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,19 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-int		ft_putstr(char const *s)
+void		ft_putstr(char const *s)
 {
 	if (!s)
-		return (FAILURE);
-	return ((int)write(1, s, ft_strlen(s)));
+		return ;
+	write(1, s, ft_strlen(s));
 }
 
-int		ft_putendl(char const *s)
+void	ft_putendl(char const *s)
 {
 	if (!s)
-		return (FAILURE);
-	if (write(1, s, ft_strlen(s)) == FAILURE)
-		return (FAILURE);
-	return ((int)write(1, "\n", 1));
+		return ;
+	write(1, s, ft_strlen(s));
+	write(1, "\n", 1);
 }
 
 void	print_args(char const **av)
