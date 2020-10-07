@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 14:47:17 by julnolle          #+#    #+#             */
-/*   Updated: 2020/10/06 17:31:29 by julnolle         ###   ########.fr       */
+/*   Updated: 2020/10/07 11:18:31 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <string.h>
 # include <pthread.h>
 # include <sys/time.h>
-// # include <stdio.h>
+# include <stdio.h>
 
 /*
 ** --------------------------------- Defines ---------------------------------

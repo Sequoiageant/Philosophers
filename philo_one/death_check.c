@@ -6,30 +6,11 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 11:20:45 by julnolle          #+#    #+#             */
-/*   Updated: 2020/10/06 17:35:00 by julnolle         ###   ########.fr       */
+/*   Updated: 2020/10/07 15:13:21 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
-
-/*int		check_death(t_options *options)
-{
-	int	max;
-	int elapsed_time;
-
-	max = options->t_to_die;
-	if (options->latest_meal == UNSET)
-		elapsed_time = ft_get_mstime() - options->timestamp_start;
-	else
-		elapsed_time = ft_get_mstime() - options->latest_meal;
-	if (elapsed_time > max)
-	{
-		ft_print_status(DIE, options);
-		return (YES);
-	}
-	else
-		return (NO);
-}*/
 
 void	*d_thread(void *arg)
 {
@@ -42,10 +23,11 @@ void	*d_thread(void *arg)
 	while (data->stop == FALSE)
 	{
 		i = 0;
-		while (data->last_meal_time[i])
+		while (i < data->nb)
 		{
+			// memset(&elapsed_time, 0, sizeof(int));
 			if (data->last_meal_time[i] == UNSET)
-				elapsed_time = get_time_in_ms();
+				elapsed_time = get_time_in_ms() - data->start_time;
 			else
 				elapsed_time = get_time_in_ms() - data->last_meal_time[i];
 			if (elapsed_time > data->die_t)

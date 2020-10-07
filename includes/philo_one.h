@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 11:51:48 by julnolle          #+#    #+#             */
-/*   Updated: 2020/10/06 17:50:36 by julnolle         ###   ########.fr       */
+/*   Updated: 2020/10/07 12:22:18 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ typedef struct		s_data
 	time_t			eat_t;
 	int				sleep_t;
 	int				meal_nb;
-	int				sb_died;
 	int				stop;
 }					t_data;
 

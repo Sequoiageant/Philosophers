@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 11:12:56 by julnolle          #+#    #+#             */
-/*   Updated: 2020/10/06 17:50:22 by julnolle         ###   ########.fr       */
+/*   Updated: 2020/10/07 12:22:33 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int		ft_init(t_data *data, char const **av, int ac)
 	data->die_t = ft_atoi(av[2]);
 	data->eat_t = ft_atoi(av[3]);
 	data->sleep_t = ft_atoi(av[4]);
-	data->sb_died = FALSE;
 	data->stop = FALSE;
 	if (ac == 6)
 		data->meal_nb = ft_atoi(av[5]);
@@ -72,12 +71,14 @@ int		ft_print_state(int id, char *action, t_data *data)
 		ft_strjoin_back(action, &output);
 		ft_putendl(output);
 		free (p_id);
+		p_id = NULL;
 		free (output);
+		output = NULL;
 		// ft_putnbr(get_time_in_ms() - data->start_time);
 		
 		// ft_putchar(' ');
 		// ft_putnbr(id);
-		// ft_putchar(' ');
+		// ft_putendl(action);
 		if (pthread_mutex_unlock(&data->display) != 0)
 		{
 			ft_putendl("mutex unlock failed");
