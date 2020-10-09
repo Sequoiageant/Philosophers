@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 16:44:28 by julnolle          #+#    #+#             */
-/*   Updated: 2020/10/09 18:39:31 by julnolle         ###   ########.fr       */
+/*   Updated: 2020/10/09 19:05:02 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static int	ft_create_odd_philo_threads(t_data *data)
 			ft_putendl("pthread_create failed");
 			return (FAILURE);
 		}
+		usleep(500);
 		i = i + 2;
 	}
 	return (SUCCESS);
@@ -64,6 +65,7 @@ static int	ft_create_even_philo_threads(t_data *data)
 			ft_putendl("pthread_create failed");
 			return (FAILURE);
 		}
+		usleep(500);
 		i = i + 2;
 	}
 	return (SUCCESS);
