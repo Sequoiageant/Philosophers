@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 11:51:48 by julnolle          #+#    #+#             */
-/*   Updated: 2020/10/07 18:13:02 by julnolle         ###   ########.fr       */
+/*   Updated: 2020/10/09 18:26:50 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,29 +36,24 @@ typedef struct		s_data
 	time_t			die_t;
 	time_t			eat_t;
 	int				sleep_t;
-	int				meal_nb;
+	int				*meal_nb;
+	int				max_meals;
 	int				stop;
 }					t_data;
-
-/*typedef struct		s_mutex
-{
-	int				var;
-	pthread_mutex_t mutex;
-}					t_mutex;
-*/
 
 /*
 ** -------------------------------- Prototypes -------------------------------
 */
 
-int		ft_philo_test(t_data *data);
+// int		ft_philo_test(t_data *data);
+int		ft_create_philo_threads(t_data *data);
 int		ft_init(t_data *data, char const **av, int ac);
-void	ft_eat(int id, t_data *data);
-void	ft_think(int id, t_data *data);
-void	ft_sleep(int id, t_data *data);
+void	ft_eat(int id, t_data *data, int right, int left);
+// void	ft_think(int id, t_data *data);
+// void	ft_sleep(int id, t_data *data);
 int		ft_print_state(int id, char *action, t_data *data);
 int		ft_print_death(int id, t_data *data);
 int		ft_create_death_thread(t_data *data);
-void	ft_wait(int delay_ms, int stop);
+int		check_max_meals(t_data *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 11:34:58 by julnolle          #+#    #+#             */
-/*   Updated: 2020/10/05 18:27:59 by julnolle         ###   ########.fr       */
+/*   Updated: 2020/10/07 19:00:19 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,6 @@ time_t	get_time_in_ms()
 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
 
-int		ft_putchar(char c)
-{
-	return ((int)write(1, &c, 1));
-}
-
 int	ft_putendl_fd(char const *s, int fd)
 {
 	if (!s)
@@ -34,23 +29,15 @@ int	ft_putendl_fd(char const *s, int fd)
 	return ((int)write(1, "\n", 1));
 }
 
-void	ft_putnbr(long n)
+void	ft_improved_sleep(int delay_ms, int stop)
 {
-	if (n == -2147483648)
-		ft_putstr("-2147483648");
-	else
+	long int	start_sleep;
+
+	if (stop == TRUE)
+		return ;
+	start_sleep = get_time_in_ms();
+	while (get_time_in_ms() - start_sleep < delay_ms)
 	{
-		if (n < 0)
-		{
-			n = -n;
-			ft_putchar('-');
-		}
-		if (n <= 9)
-			ft_putchar(n + 48);
-		else
-		{
-			ft_putnbr(n / 10);
-			ft_putnbr(n % 10);
-		}
+		usleep(USLEEP_DELAY);
 	}
 }

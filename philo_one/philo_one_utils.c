@@ -6,28 +6,31 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 11:12:56 by julnolle          #+#    #+#             */
-/*   Updated: 2020/10/07 18:16:15 by julnolle         ###   ########.fr       */
+/*   Updated: 2020/10/08 16:59:58 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-int		ft_philo_test(t_data *data)
+int		ft_malloc_datas(t_data *data)
 {
 	int	i;
 
 	data->fork = NULL;
 	data->last_meal_time = NULL;
+	data->meal_nb = NULL;
 	if (data->nb > 1)
 	{
 		data->fork = malloc(sizeof(pthread_mutex_t) * data->nb);
 		data->last_meal_time = malloc(sizeof(time_t) * data->nb);
-		if (data->fork && data->last_meal_time)
+		data->meal_nb = malloc(sizeof(int) * data->nb);
+		if (data->fork && data->last_meal_time && data->meal_nb)
 		{
 			i = 0;
 			while (i < data->nb)
 			{
 				data->last_meal_time[i] = UNSET;
+				data->meal_nb[i] = 0;
 				i++;
 			}
 			return (SUCCESS);
@@ -46,8 +49,10 @@ int		ft_init(t_data *data, char const **av, int ac)
 	data->sleep_t = ft_atoi(av[4]);
 	data->stop = FALSE;
 	if (ac == 6)
-		data->meal_nb = ft_atoi(av[5]);
-	if (ft_philo_test(data) == SUCCESS)
+		data->max_meals = ft_atoi(av[5]);
+	else
+		data->max_meals = UNSET;
+	if (ft_malloc_datas(data) == SUCCESS)
 		return (SUCCESS);
 	return (FAILURE);
 }
@@ -73,6 +78,7 @@ int		ft_print_state(int id, char *action, t_data *data)
 	ft_strjoin_back(p_id, &output);
 	ft_strjoin_back(action, &output);
 	ft_putendl(output);
+	// check_max_meals(data);
 	if (pthread_mutex_unlock(&data->display) != 0)
 	{
 		ft_putendl("mutex unlock failed");
@@ -81,17 +87,4 @@ int		ft_print_state(int id, char *action, t_data *data)
 	free (p_id);
 	free (output);
 	return (SUCCESS);
-}
-
-void	ft_wait(int delay_ms, int stop)
-{
-	long int	start_sleep;
-
-	if (stop == TRUE)
-		return ;
-	start_sleep = get_time_in_ms();
-	while (get_time_in_ms() - start_sleep < delay_ms)
-	{
-		usleep(USLEEP_DELAY);
-	}
 }

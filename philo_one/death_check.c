@@ -6,16 +6,31 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 11:20:45 by julnolle          #+#    #+#             */
-/*   Updated: 2020/10/07 16:07:59 by julnolle         ###   ########.fr       */
+/*   Updated: 2020/10/09 12:53:56 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
+int		check_max_meals(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->nb)
+	{
+		if (data->meal_nb[i] < data->max_meals)
+			return (FALSE);
+		i++;
+	}
+	return (TRUE);
+}
+
 void	*d_thread(void *arg)
 {
 	t_data	*data;
 	int		i;
+	int		count;
 	int		elapsed_time;
 
 	data = (t_data *)arg;
@@ -23,6 +38,7 @@ void	*d_thread(void *arg)
 	while (data->stop == FALSE)
 	{
 		i = 0;
+		count = 0;
 		while (i < data->nb)
 		{
 			// memset(&elapsed_time, 0, sizeof(int));
@@ -32,11 +48,11 @@ void	*d_thread(void *arg)
 				elapsed_time = get_time_in_ms() - data->last_meal_time[i];
 			if (elapsed_time > data->die_t)
 			{
-				ft_print_state(i + 1, " is dead", data);
-				// ft_print_death(i + 1, data);
+				ft_print_state(i + 1, " died", data);
 				data->stop = TRUE;
 				return (NULL);
 			}
+			// data->stop = check_max_meals(data);
 			i++;
 		}
 		usleep(2000);

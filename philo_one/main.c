@@ -6,57 +6,11 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 12:24:12 by julnolle          #+#    #+#             */
-/*   Updated: 2020/10/07 15:35:58 by julnolle         ###   ########.fr       */
+/*   Updated: 2020/10/09 18:27:52 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
-
-void *thread_philo(void *arg)
-{
-	t_data	*data;
-	int		id;
-	int		right;
-	int		left;
-
-	// printf("Nous sommes dans le thread %d.\n", data->selected_philo - 1);
-	data = (t_data *)arg;
-	// memset(&id, 0, sizeof(int));
-	// memset(&right, 0, sizeof(int));
-	// memset(&left, 0, sizeof(int));
-	id = data->selected_philo;
-	right = id - 1;
-	left = (right + 1) > data->nb - 1 ? 0 : (right + 1);
-	while (data->stop == FALSE)
-	{
-		if (pthread_mutex_lock(&data->fork[right]) != 0)
-		{
-			ft_putendl("mutex lock failed");
-			return (NULL);
-		}
-		ft_print_state(id, " has taken right fork", data);
-		if (pthread_mutex_lock(&data->fork[left]) != 0)
-		{
-			ft_putendl("mutex lock failed");
-			return (NULL);
-		}
-		ft_print_state(id, " has taken left fork", data);
-		ft_eat(id, data);
-		if (pthread_mutex_unlock(&data->fork[right]) != 0)
-		{
-			ft_putendl("mutex unlock failed");
-			return (NULL);
-		}
-		if (pthread_mutex_unlock(&data->fork[left]) != 0)
-		{
-			ft_putendl("mutex unlock failed");
-			return (NULL);
-		}
-		ft_sleep(id, data);
-		ft_print_state(id, " is thinking", data);
-	}
-	return (NULL);
-}
 
 int	ft_create_mutexes(t_data *data)
 {
@@ -79,27 +33,6 @@ int	ft_create_mutexes(t_data *data)
 	}
 	return (SUCCESS);
 }
-int	ft_create_philo_threads(t_data *data)
-{
-	int	i;
-
-	data->p_threads = malloc((data->nb - 1) * sizeof(pthread_t));
-	if (data->p_threads == NULL)
-		return (FAILURE);
-	i = 0;
-	while (i < data->nb)
-	{
-		data->selected_philo = i + 1;
-		if (pthread_create(&data->p_threads[i], NULL, thread_philo, data))
-		{
-			ft_putendl("pthread_create failed");
-			return (FAILURE);
-		}
-		usleep(500);
-		i++;
-	}
-	return (SUCCESS);
-}
 
 int	ft_join_philo_threads(t_data *data)
 {
@@ -113,30 +46,17 @@ int	ft_join_philo_threads(t_data *data)
 			ft_putendl("pthread_join failed");
 			return (FAILURE);
 		}
-		// ft_putnbr(i);
-		// ft_putendl("");
-		// usleep(500);
-		// ft_print_state(i + 1, "\033[33mis dead\033[0m", data);
-		// printf("The Philosopher [%d] died at %ldms, last meal at: %d\n", data->selected_philo, get_time_in_ms(), *thread_return);
-		// return (FAILURE);
 		i++;
 	}
+	free(data->p_threads);
 	return (SUCCESS);
 }
 
-int	 philo_one(t_data *data)
+int ft_free_all(t_data *data)
 {
 	int	i;
 
-	if (ft_create_mutexes(data) == FAILURE)
-		return (FAILURE);
-	if (ft_create_philo_threads(data) == FAILURE)
-		return (FAILURE);
-	if (ft_create_death_thread(data) == FAILURE)
-		return (FAILURE);
-	if (ft_join_philo_threads(data) == FAILURE)
-		return (FAILURE);
-	i = 0;	
+	i = 0;
 	while (i < data->nb)
 	{
 		if (pthread_mutex_destroy(&data->fork[i]) != 0)
@@ -146,6 +66,28 @@ int	 philo_one(t_data *data)
 		}
 		i++;
 	}
+	if (pthread_mutex_destroy(&data->display) != 0)
+	{
+		ft_putendl("mutex destroy failed");
+		return (FAILURE);
+	}
+	free(data->fork);
+	free(data->last_meal_time);
+	free(data->meal_nb);
+	return (SUCCESS);
+}
+
+int	 philo_one(t_data *data)
+{
+	if (ft_create_mutexes(data) == FAILURE)
+		return (FAILURE);
+	if (ft_create_philo_threads(data) == FAILURE)
+		return (FAILURE);
+	if (ft_create_death_thread(data) == FAILURE)
+		return (FAILURE);
+	if (ft_join_philo_threads(data) == FAILURE)
+		return (FAILURE);
+	ft_free_all(data);
 	return (SUCCESS);
 }
 
@@ -157,7 +99,7 @@ int		main(int ac, char const **av)
 	{
 		if (ft_init(&data, av, ac) == SUCCESS)
 		{
-			print_args(av);
+			// print_args(av);
 			philo_one(&data);
 		}
 		else

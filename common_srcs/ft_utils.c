@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 16:32:59 by julnolle          #+#    #+#             */
-/*   Updated: 2020/10/07 15:59:56 by julnolle         ###   ########.fr       */
+/*   Updated: 2020/10/07 18:58:10 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-void		ft_putstr(char const *s)
+void	ft_putstr(char const *s)
 {
 	if (!s)
 		return ;
