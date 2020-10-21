@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 12:24:12 by julnolle          #+#    #+#             */
-/*   Updated: 2020/10/09 18:27:52 by julnolle         ###   ########.fr       */
+/*   Updated: 2020/10/20 12:47:01 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,13 +97,11 @@ int		main(int ac, char const **av)
 
 	if (ac == 5 || ac == 6)
 	{
-		if (ft_init(&data, av, ac) == SUCCESS)
+		if (ft_check_args(av) == SUCCESS)
 		{
-			// print_args(av);
-			philo_one(&data);
+			if (ft_init(&data, av, ac) == SUCCESS)
+				philo_one(&data);
 		}
-		else
-			ft_putendl("Wrong number_of_philosopher");
 	}
 	else
 		ft_putendl("Wrong nbr of arguments");

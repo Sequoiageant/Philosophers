@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_one_utils.c                                  :+:      :+:    :+:   */
+/*   philo_two_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 11:12:56 by julnolle          #+#    #+#             */
-/*   Updated: 2020/10/20 12:28:20 by julnolle         ###   ########.fr       */
+/*   Updated: 2020/10/21 11:41:42 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_one.h"
+#include "philo_two.h"
 
 int		ft_malloc_datas(t_data *data)
 {
 	int	i;
 
-	data->fork = NULL;
 	data->last_meal_time = NULL;
 	data->meal_nb = NULL;
 	if (data->nb > 1)
 	{
-		data->fork = malloc(sizeof(pthread_mutex_t) * data->nb);
 		data->last_meal_time = malloc(sizeof(time_t) * data->nb);
 		data->meal_nb = malloc(sizeof(int) * data->nb);
-		if (data->fork && data->last_meal_time && data->meal_nb)
+		if (data->last_meal_time && data->meal_nb)
 		{
 			i = 0;
 			while (i < data->nb)
@@ -48,6 +46,7 @@ int		ft_init(t_data *data, char const **av, int ac)
 		ft_putendl("The simulation needs at least 2 philosophers to run");
 		return (FAILURE);
 	}
+	data->forks = NULL;
 	data->selected_philo = 0;
 	data->die_t = ft_atoi(av[2]);
 	data->eat_t = ft_atoi(av[3]);
@@ -67,14 +66,10 @@ int		ft_print_state(int id, char *action, t_data *data)
 	char	*p_id;
 	char	*output;
 
-	if (pthread_mutex_lock(&data->display) != 0)
-	{
-		ft_putendl("mutex lock failed");
-		return (FAILURE);
-	}
+	sem_wait(data->display);
 	if (data->stop == TRUE)
 	{
-		pthread_mutex_unlock(&data->display);
+		sem_post(data->display);
 		return (SUCCESS);
 	}
 	output = ft_itoa(get_time_in_ms() - data->start_time);
@@ -83,12 +78,7 @@ int		ft_print_state(int id, char *action, t_data *data)
 	ft_strjoin_back(p_id, &output);
 	ft_strjoin_back(action, &output);
 	ft_putendl(output);
-	// check_max_meals(data);
-	if (pthread_mutex_unlock(&data->display) != 0)
-	{
-		ft_putendl("mutex unlock failed");
-		return (FAILURE);
-	}
+	sem_post(data->display);
 	free (p_id);
 	free (output);
 	return (SUCCESS);

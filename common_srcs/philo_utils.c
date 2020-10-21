@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 11:34:58 by julnolle          #+#    #+#             */
-/*   Updated: 2020/10/07 19:00:19 by julnolle         ###   ########.fr       */
+/*   Updated: 2020/10/20 12:45:54 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ time_t	get_time_in_ms()
 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
 
-int	ft_putendl_fd(char const *s, int fd)
+int		ft_putendl_fd(char const *s, int fd)
 {
 	if (!s)
 		return (FAILURE);

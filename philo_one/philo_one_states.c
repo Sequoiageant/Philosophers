@@ -6,14 +6,37 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 11:24:40 by julnolle          #+#    #+#             */
-/*   Updated: 2020/10/08 16:41:49 by julnolle         ###   ########.fr       */
+/*   Updated: 2020/10/20 11:57:09 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
+/*int		check_priority(int id, t_data *data)
+{
+	int right;
+	int left;
+	int right_id;
+
+	right_id = id == 0 ? data->nb - 1 : id - 1;
+	if (data->meal_nb[id] == 0)
+		return (TRUE);
+	right = data->meal_nb[right_id];
+	left = data->meal_nb[id + 1];
+	if (data->meal_nb[id] < left && data->meal_nb[id] < right)
+		return (TRUE);
+	else
+		return (FALSE);
+}*/
+
 void	ft_eat(int id, t_data *data, int right, int left)
 {
+	// while (data->stop == FALSE)
+	// {
+	// 	if (check_priority(id - 1, data) == TRUE)
+	// 		break ;
+	// 	usleep(200);
+	// }
 	if (pthread_mutex_lock(&data->fork[right]) != 0)
 		return ;
 	ft_print_state(id, " has taken a fork", data);
