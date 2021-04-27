@@ -1,61 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   death_check.c                                      :+:      :+:    :+:   */
+/*   philo_one_checks.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 11:20:45 by julnolle          #+#    #+#             */
-/*   Updated: 2021/04/27 19:09:49 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/04/27 19:18:58 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
-
-/*static char	check_max_meals(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->nb)
-	{
-		if (data->meal_nb[i] < data->max_meals)
-			return (CONTINUE);
-		++i;
-		usleep(10);
-	}
-	return (STOP);
-}
-
-static void	*m_thread(void *arg)
-{
-	t_data	*data;
-
-	data = (t_data *)arg;
-	while (data->stop == CONTINUE)
-	{
-		data->stop = check_max_meals(data);
-		usleep(10);
-	}
-	return (NULL);
-}
-
-int			ft_create_meal_thread(t_data *data)
-{
-	pthread_t meal_thread;
-
-	if (pthread_create(&meal_thread, NULL, &m_thread, data))
-	{
-		ft_putendl_fd("pthread_create failed", 2);
-		return (FAILURE);
-	}
-	if (pthread_detach(meal_thread) != 0)
-	{
-		ft_putendl_fd("pthread_detach failed", 2);
-		return (FAILURE);
-	}
-	return (SUCCESS);
-}*/
 
 char		check_max_meals(t_data *data)
 {

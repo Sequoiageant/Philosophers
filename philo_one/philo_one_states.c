@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 11:24:40 by julnolle          #+#    #+#             */
-/*   Updated: 2021/04/27 19:05:14 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/04/27 19:16:47 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		check_priority(int id, t_data *data)
 	int left_id;
 
 	right_id = id == 0 ? data->nb - 1 : id - 1;
-	left_id = (id+1) % data->nb;
+	left_id = (id + 1) % data->nb;
 	// printf("pos %d: left: %d / right: %d\n", id, left_id, right_id);
 
 	if (data->meal_nb[id] == 0)
@@ -56,18 +56,3 @@ void	ft_eat(int id, t_data *data, int right, int left)
 	if (pthread_mutex_unlock(&data->fork[right]) != 0)
 		return ;
 }
-
-/*void	ft_think(int id, t_data *data)
-{
-	ft_print_state(id, " is thinking", data);
-	// printf("%6ld ms: Philo [%d] is thinking\n", get_time_in_ms(),id);
-}
-*/
-/*void	ft_sleep(int id, t_data *data)
-{
-	ft_print_state(id, " is sleeping", data);
-	// printf("%6ld ms: Philo [%d] is sleeping %dms\n", get_time_in_ms(), id, data->sleep_t);
-	ft_improved_sleep(data->sleep_t, data->stop);
-	// usleep(data->sleep_t * 1000);
-}
-*/
