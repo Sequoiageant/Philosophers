@@ -6,13 +6,13 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 11:20:45 by julnolle          #+#    #+#             */
-/*   Updated: 2020/10/10 11:15:39 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/04/26 18:29:59 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-int		check_max_meals(t_data *data)
+char	check_max_meals(t_data *data)
 {
 	int	i;
 
@@ -20,11 +20,11 @@ int		check_max_meals(t_data *data)
 	while (i < data->nb)
 	{
 		if (data->meal_nb[i] < data->max_meals)
-			return (FALSE);
-		i++;
-		usleep(10);
+			return (CONTINUE);
+		++i;
+		// usleep(10);
 	}
-	return (TRUE);
+	return (STOP);
 }
 
 void	*d_thread(void *arg)
@@ -36,7 +36,7 @@ void	*d_thread(void *arg)
 
 	data = (t_data *)arg;
 	i = 0;
-	while (data->stop == FALSE)
+	while (data->stop == CONTINUE)
 	{
 		i = 0;
 		count = 0;
@@ -50,14 +50,14 @@ void	*d_thread(void *arg)
 			if (elapsed_time > data->die_t)
 			{
 				ft_print_state(i + 1, " died", data);
-				data->stop = TRUE;
+				data->stop = STOP;
 				return (NULL);
 			}
 			if (data->max_meals != UNSET)
 				data->stop = check_max_meals(data);
 			i++;
 		}
-		usleep(1500);
+		usleep(1000);
 	}
 	return (NULL);
 }

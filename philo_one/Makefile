@@ -6,7 +6,7 @@
 #    By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/16 14:51:18 by julnolle          #+#    #+#              #
-#    Updated: 2020/10/20 12:47:40 by julnolle         ###   ########.fr        #
+#    Updated: 2021/04/26 18:46:42 by julnolle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ CC	= clang
 
 CFLAGS +=	-Wall
 CFLAGS +=	-Wextra
+# CFLAGS += -Wpadded
 
 ifneq ($(err), no)
 	CFLAGS += -Werror

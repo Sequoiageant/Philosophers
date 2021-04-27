@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 14:47:17 by julnolle          #+#    #+#             */
-/*   Updated: 2020/10/20 12:49:26 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/04/26 18:30:58 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 # define TRUE		1
 # define FALSE		0
 # define UNSET		-1
+# define STOP		's'
+# define CONTINUE	'c'
 
 # define ARG_NB		5
 # define NB			"number_of_forks & philosophers: "
@@ -62,17 +64,17 @@
 ** ----------------------------- Common prototypes ----------------------------
 */
 
-int		ft_atoi(const char *str);
-size_t	ft_strlen(const char *str);
-int		ft_putchar(char c);
-void	ft_putstr(char const *s);
-void	ft_putendl(char const *s);
-int		ft_putendl_fd(char const *s, int fd);
-int		ft_check_args(char const **av);
-void	ft_strjoin_back(char *back, char **src);
-char	*ft_itoa(long n);
+int			ft_atoi(const char *str);
+size_t		ft_strlen(const char *str);
+int			ft_putchar(char c);
+void		ft_putstr(char const *s);
+void		ft_putendl(char const *s);
+int			ft_putendl_fd(char const *s, int fd);
+int			ft_check_args(char const **av);
+void		ft_strjoin_back(char *back, char **src);
+char		*ft_itoa(long n);
 // void	print_args(char const **av);
-time_t	get_time_in_ms(void);
-void	ft_improved_sleep(int delay_ms, int stop);
+long int	get_time_in_ms(void);
+void		ft_improved_sleep(int delay_ms, char stop);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 11:12:56 by julnolle          #+#    #+#             */
-/*   Updated: 2020/10/21 11:41:42 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/04/27 11:16:58 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,20 @@ int		ft_init(t_data *data, char const **av, int ac)
 
 int		ft_print_state(int id, char *action, t_data *data)
 {
+	sem_wait(data->display);
+	if (data->stop == TRUE)
+	{
+		sem_post(data->display);
+		return (SUCCESS);
+	}
+	printf("%ld %d%s\n", get_time_in_ms() - data->start_time, id, action);
+	sem_post(data->display);
+	return (SUCCESS);
+}
+
+/*
+int		ft_print_state(int id, char *action, t_data *data)
+{
 	char	*p_id;
 	char	*output;
 
@@ -83,3 +97,4 @@ int		ft_print_state(int id, char *action, t_data *data)
 	free (output);
 	return (SUCCESS);
 }
+*/

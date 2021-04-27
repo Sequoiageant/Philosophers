@@ -6,52 +6,55 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 11:24:40 by julnolle          #+#    #+#             */
-/*   Updated: 2020/10/20 11:57:09 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/04/26 20:06:46 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-/*int		check_priority(int id, t_data *data)
+int		check_priority(int id, t_data *data)
 {
-	int right;
-	int left;
+	int right_meal;
+	int left_meal;
 	int right_id;
+	int left_id;
 
 	right_id = id == 0 ? data->nb - 1 : id - 1;
+	left_id = (id+1) % data->nb;
+	// printf("pos %d: left: %d / right: %d\n", id, left_id, right_id);
+
 	if (data->meal_nb[id] == 0)
 		return (TRUE);
-	right = data->meal_nb[right_id];
-	left = data->meal_nb[id + 1];
-	if (data->meal_nb[id] < left && data->meal_nb[id] < right)
+	right_meal = data->meal_nb[right_id];
+	left_meal = data->meal_nb[left_id];
+	if (data->meal_nb[id] < left_meal && data->meal_nb[id] < right_meal)
 		return (TRUE);
 	else
 		return (FALSE);
-}*/
+}
 
 void	ft_eat(int id, t_data *data, int right, int left)
 {
-	// while (data->stop == FALSE)
+	// while (data->stop == CONTINUE)
 	// {
 	// 	if (check_priority(id - 1, data) == TRUE)
 	// 		break ;
 	// 	usleep(200);
 	// }
-	if (pthread_mutex_lock(&data->fork[right]) != 0)
-		return ;
-	ft_print_state(id, " has taken a fork", data);
 	if (pthread_mutex_lock(&data->fork[left]) != 0)
 		return ;
 	ft_print_state(id, " has taken a fork", data);
-	data->last_meal_time[id - 1] = get_time_in_ms();
-	// ft_print_state(id, " \033[33mis eating\033[0m", data);	
-	ft_print_state(id, " is eating", data);	
-	ft_improved_sleep(data->eat_t, data->stop);
-	if (pthread_mutex_unlock(&data->fork[right]) != 0)
+	if (pthread_mutex_lock(&data->fork[right]) != 0)
 		return ;
+	ft_print_state(id, " has taken a fork", data);
+	ft_print_state(id, " is eating", data);
+	data->meal_nb[id - 1]++;
+	data->last_meal_time[id - 1] = get_time_in_ms();
+	ft_improved_sleep(data->eat_t, data->stop);
 	if (pthread_mutex_unlock(&data->fork[left]) != 0)
 		return ;
-	data->meal_nb[id - 1]++;
+	if (pthread_mutex_unlock(&data->fork[right]) != 0)
+		return ;
 }
 
 /*void	ft_think(int id, t_data *data)

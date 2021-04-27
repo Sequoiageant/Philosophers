@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 11:12:56 by julnolle          #+#    #+#             */
-/*   Updated: 2020/10/20 12:28:20 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/04/26 18:47:41 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int		ft_init(t_data *data, char const **av, int ac)
 	data->die_t = ft_atoi(av[2]);
 	data->eat_t = ft_atoi(av[3]);
 	data->sleep_t = ft_atoi(av[4]);
-	data->stop = FALSE;
+	data->stop = CONTINUE;
 	if (ac == 6)
 		data->max_meals = ft_atoi(av[5]);
 	else
@@ -64,6 +64,40 @@ int		ft_init(t_data *data, char const **av, int ac)
 
 int		ft_print_state(int id, char *action, t_data *data)
 {
+	// char	*p_id;
+	// char	*output;
+
+	if (pthread_mutex_lock(&data->display) != 0)
+	{
+		ft_putendl("mutex lock failed");
+		return (FAILURE);
+	}
+	if (data->stop == STOP)
+	{
+		pthread_mutex_unlock(&data->display);
+		return (SUCCESS);
+	}
+	// output = ft_itoa(get_time_in_ms() - data->start_time);
+	// p_id = ft_itoa(id);
+	printf("%ld %d%s\n", get_time_in_ms() - data->start_time, id, action);
+	// if (data->stop == STOP)
+	// {
+	// 	pthread_mutex_unlock(&data->display);
+	// 	return (SUCCESS);
+	// }
+	// check_max_meals(data);
+	if (pthread_mutex_unlock(&data->display) != 0)
+	{
+		ft_putendl("mutex unlock failed");
+		return (FAILURE);
+	}
+	// free (p_id);
+	// free (output);
+	return (SUCCESS);
+}
+/*
+int		ft_print_state(int id, char *action, t_data *data)
+{
 	char	*p_id;
 	char	*output;
 
@@ -72,7 +106,7 @@ int		ft_print_state(int id, char *action, t_data *data)
 		ft_putendl("mutex lock failed");
 		return (FAILURE);
 	}
-	if (data->stop == TRUE)
+	if (data->stop == STOP)
 	{
 		pthread_mutex_unlock(&data->display);
 		return (SUCCESS);
@@ -93,3 +127,4 @@ int		ft_print_state(int id, char *action, t_data *data)
 	free (output);
 	return (SUCCESS);
 }
+*/

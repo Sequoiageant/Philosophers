@@ -6,18 +6,18 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 11:51:48 by julnolle          #+#    #+#             */
-/*   Updated: 2020/10/21 11:17:36 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/04/27 11:21:29 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_TWO_H
 # define PHILO_TWO_H
 
-#include "philo.h"
-#include <semaphore.h>
-#include <fcntl.h>
-#include <sys/stat.h>
-#include <errno.h>
+# include "philo.h"
+# include <semaphore.h>
+# include <fcntl.h>
+# include <sys/stat.h>
+# include <errno.h>
 
 /*
 ** --------------------------------- Defines ---------------------------------
@@ -33,16 +33,17 @@ typedef struct		s_data
 	sem_t			*forks;
 	sem_t			*display;
 	pthread_t		*p_threads;
-	time_t			start_time;
 	time_t			*last_meal_time;
-	int				nb;
-	int				selected_philo;
+	time_t			start_time;
 	time_t			die_t;
 	time_t			eat_t;
-	int				sleep_t;
 	int				*meal_nb;
+	int				nb;
+	int				selected_philo;
+	int				sleep_t;
 	int				max_meals;
 	int				stop;
+	char			pad[4];
 }					t_data;
 
 /*
