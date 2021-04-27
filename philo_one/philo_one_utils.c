@@ -6,13 +6,13 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 11:12:56 by julnolle          #+#    #+#             */
-/*   Updated: 2021/04/26 18:47:41 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/04/27 15:37:14 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-int		ft_malloc_datas(t_data *data)
+static int		ft_malloc_datas(t_data *data)
 {
 	int	i;
 
@@ -39,7 +39,7 @@ int		ft_malloc_datas(t_data *data)
 	return (FAILURE);
 }
 
-int		ft_init(t_data *data, char const **av, int ac)
+int				ft_init(t_data *data, char const **av, int ac)
 {
 	data->start_time = get_time_in_ms();
 	data->nb = ft_atoi(av[1]);
@@ -62,11 +62,8 @@ int		ft_init(t_data *data, char const **av, int ac)
 	return (FAILURE);
 }
 
-int		ft_print_state(int id, char *action, t_data *data)
+int				ft_print_state(int id, char *action, t_data *data)
 {
-	// char	*p_id;
-	// char	*output;
-
 	if (pthread_mutex_lock(&data->display) != 0)
 	{
 		ft_putendl("mutex lock failed");
@@ -77,22 +74,12 @@ int		ft_print_state(int id, char *action, t_data *data)
 		pthread_mutex_unlock(&data->display);
 		return (SUCCESS);
 	}
-	// output = ft_itoa(get_time_in_ms() - data->start_time);
-	// p_id = ft_itoa(id);
-	printf("%ld %d%s\n", get_time_in_ms() - data->start_time, id, action);
-	// if (data->stop == STOP)
-	// {
-	// 	pthread_mutex_unlock(&data->display);
-	// 	return (SUCCESS);
-	// }
-	// check_max_meals(data);
+	printf("%ld %d %s\n", get_time_in_ms() - data->start_time, id, action);
 	if (pthread_mutex_unlock(&data->display) != 0)
 	{
 		ft_putendl("mutex unlock failed");
 		return (FAILURE);
 	}
-	// free (p_id);
-	// free (output);
 	return (SUCCESS);
 }
 /*

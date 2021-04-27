@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 11:51:48 by julnolle          #+#    #+#             */
-/*   Updated: 2021/04/27 11:20:27 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/04/27 15:27:37 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	ft_eat(int id, t_data *data, int right, int left);
 int		ft_print_state(int id, char *action, t_data *data);
 int		ft_print_death(int id, t_data *data);
 int		ft_create_death_thread(t_data *data);
-char	check_max_meals(t_data *data);
+int		ft_create_meal_thread(t_data *data);
+// char	check_max_meals(t_data *data);
 
 #endif

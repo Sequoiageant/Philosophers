@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 16:32:59 by julnolle          #+#    #+#             */
-/*   Updated: 2020/10/20 12:48:26 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/04/27 15:16:29 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	ft_putendl(char const *s)
 	write(1, "\n", 1);
 }
 
-void	print_args(char const **av)
+/*void	print_args(char const **av)
 {
 	size_t		i;
 	static char	*args[ARG_NB] = {NB, DIE_T, EAT_T, SLEEP_T, MEAL_NB};
@@ -71,3 +71,4 @@ void	print_args(char const **av)
 	}
 	ft_putendl("==== end settings ====\n");
 }
+*/

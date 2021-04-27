@@ -6,13 +6,13 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 11:20:45 by julnolle          #+#    #+#             */
-/*   Updated: 2021/04/26 18:29:59 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/04/27 15:46:05 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-char	check_max_meals(t_data *data)
+static char	check_max_meals(t_data *data)
 {
 	int	i;
 
@@ -22,27 +22,53 @@ char	check_max_meals(t_data *data)
 		if (data->meal_nb[i] < data->max_meals)
 			return (CONTINUE);
 		++i;
-		// usleep(10);
+		usleep(10);
 	}
 	return (STOP);
 }
 
-void	*d_thread(void *arg)
+static void	*m_thread(void *arg)
+{
+	t_data	*data;
+
+	data = (t_data *)arg;
+	while (data->stop == CONTINUE)
+	{
+		data->stop = check_max_meals(data);
+		usleep(10);
+	}
+	return (NULL);
+}
+
+int			ft_create_meal_thread(t_data *data)
+{
+	pthread_t meal_thread;
+
+	if (pthread_create(&meal_thread, NULL, &m_thread, data))
+	{
+		ft_putendl_fd("pthread_create failed", 2);
+		return (FAILURE);
+	}
+	if (pthread_detach(meal_thread) != 0)
+	{
+		ft_putendl_fd("pthread_detach failed", 2);
+		return (FAILURE);
+	}
+	return (SUCCESS);
+}
+
+static void	*d_thread(void *arg)
 {
 	t_data	*data;
 	int		i;
-	int		count;
-	int		elapsed_time;
+	time_t	elapsed_time;
 
 	data = (t_data *)arg;
-	i = 0;
 	while (data->stop == CONTINUE)
 	{
 		i = 0;
-		count = 0;
 		while (i < data->nb)
 		{
-			// memset(&elapsed_time, 0, sizeof(int));
 			if (data->last_meal_time[i] == UNSET)
 				elapsed_time = get_time_in_ms() - data->start_time;
 			else
@@ -53,16 +79,14 @@ void	*d_thread(void *arg)
 				data->stop = STOP;
 				return (NULL);
 			}
-			if (data->max_meals != UNSET)
-				data->stop = check_max_meals(data);
 			i++;
 		}
-		usleep(1000);
+		usleep(2000);
 	}
 	return (NULL);
 }
 
-int		ft_create_death_thread(t_data *data)
+int			ft_create_death_thread(t_data *data)
 {
 	pthread_t death_thread;
 

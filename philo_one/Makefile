@@ -6,7 +6,7 @@
 #    By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/16 14:51:18 by julnolle          #+#    #+#              #
-#    Updated: 2021/04/26 18:46:42 by julnolle         ###   ########.fr        #
+#    Updated: 2021/04/27 15:34:38 by julnolle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,8 +63,8 @@ _YELLOW		= \033[33m
 # Common Sources
 SRCS += ft_utils.c
 SRCS += ft_checks.c
-SRCS += ft_itoa.c
-SRCS += ft_strjoin_back.c
+# SRCS += ft_itoa.c
+# SRCS += ft_strjoin_back.c
 SRCS += philo_utils.c
 
 # Main Sources
