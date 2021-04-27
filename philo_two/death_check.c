@@ -6,13 +6,13 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 11:20:45 by julnolle          #+#    #+#             */
-/*   Updated: 2021/04/27 18:13:25 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/04/27 18:43:09 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_two.h"
 
-static char	check_max_meals(t_data *data)
+/*static char	check_max_meals(t_data *data)
 {
 	int	i;
 
@@ -22,7 +22,9 @@ static char	check_max_meals(t_data *data)
 		if (data->meal_nb[i] < data->max_meals)
 			return (CONTINUE);
 		++i;
+		// usleep(10);
 	}
+	data->stop = STOP;
 	return (STOP);
 }
 
@@ -31,41 +33,42 @@ static void	*m_thread(void *arg)
 	t_data	*data;
 
 	data = (t_data *)arg;
-	while (1)
+	while (data->stop == CONTINUE)
 	{
-		data->stop = check_max_meals(data);
-		// usleep(10);
+		check_max_meals(data);
+		usleep(10);
 	}
 	return (NULL);
-}
+}*/
 
-int			ft_create_meal_thread(t_data *data)
+/*char	check_max_meals(t_data *data)
 {
-	pthread_t meal_thread;
+	int	i;
 
-	if (pthread_create(&meal_thread, NULL, &m_thread, data))
+	i = 0;
+	while (i < data->nb)
 	{
-		ft_putendl_fd("pthread_create failed", 2);
-		return (FAILURE);
+		if (data->meal_nb[i] < data->max_meals)
+			return (CONTINUE);
+		i++;
+		usleep(10);
 	}
-	if (pthread_detach(meal_thread) != 0)
-	{
-		ft_putendl_fd("pthread_detach failed", 2);
-		return (FAILURE);
-	}
-	return (SUCCESS);
-}
+	return (STOP);
+}*/
 
-static void	*d_thread(void *arg)
+void	*d_thread(void *arg)
 {
 	t_data	*data;
 	int		i;
-	time_t	elapsed_time;
+	int		count;
+	int		elapsed_time;
 
 	data = (t_data *)arg;
+	i = 0;
 	while (data->stop == CONTINUE)
 	{
 		i = 0;
+		count = 0;
 		while (i < data->nb)
 		{
 			if (data->last_meal_time[i] == UNSET)
@@ -74,8 +77,7 @@ static void	*d_thread(void *arg)
 				elapsed_time = get_time_in_ms() - data->last_meal_time[i];
 			if (elapsed_time > data->die_t)
 			{
-				ft_print_state(i + 1, "died", data);
-				data->stop = STOP;
+				ft_print_state(i + 1, DIE, data);
 				return (NULL);
 			}
 			i++;
@@ -85,7 +87,7 @@ static void	*d_thread(void *arg)
 	return (NULL);
 }
 
-int			ft_create_death_thread(t_data *data)
+int		ft_create_death_thread(t_data *data)
 {
 	pthread_t death_thread;
 

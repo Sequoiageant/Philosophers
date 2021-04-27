@@ -6,13 +6,13 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 11:12:56 by julnolle          #+#    #+#             */
-/*   Updated: 2021/04/27 18:04:51 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/04/27 18:54:03 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_two.h"
 
-int		ft_malloc_datas(t_data *data)
+int			ft_malloc_datas(t_data *data)
 {
 	int	i;
 
@@ -37,7 +37,7 @@ int		ft_malloc_datas(t_data *data)
 	return (FAILURE);
 }
 
-int		ft_init(t_data *data, char const **av, int ac)
+int			ft_init(t_data *data, char const **av, int ac)
 {
 	data->start_time = get_time_in_ms();
 	data->nb = ft_atoi(av[1]);
@@ -61,7 +61,37 @@ int		ft_init(t_data *data, char const **av, int ac)
 	return (FAILURE);
 }
 
-int		ft_print_state(int id, char *action, t_data *data)
+static char	*get_action(int state)
+{
+	if (state == FORK)
+		return ("has taken a fork");
+	else if (state == EAT)
+		return ("is eating");
+	else if (state == SLEEP)
+		return ("is sleeping");
+	else if (state == THINK)
+		return ("is thinking");
+	else if (state == DIE)
+		return ("died");
+	else
+		return ("died");
+}
+
+static char	check_max_meals(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->nb)
+	{
+		if (data->meal_nb[i] < data->max_meals)
+			return (CONTINUE);
+		i++;
+	}
+	return (STOP);
+}
+
+int			ft_print_state(int id, int state, t_data *data)
 {
 	sem_wait(data->display);
 	if (data->stop != CONTINUE)
@@ -69,7 +99,15 @@ int		ft_print_state(int id, char *action, t_data *data)
 		sem_post(data->display);
 		return (SUCCESS);
 	}
-	printf("stop: %c %ld %d %s\n", data->stop, get_time_in_ms() - data->start_time, id, action);
+	printf("%ld %d %s\n",
+		get_time_in_ms() - data->start_time, id, get_action(state));
+	if (state == DIE)
+		data->stop = STOP;
+	if (state == EAT && data->max_meals != UNSET)
+	{
+		if (check_max_meals(data) == STOP)
+			data->stop = STOP;
+	}
 	sem_post(data->display);
 	return (SUCCESS);
 }
