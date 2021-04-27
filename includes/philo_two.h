@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 11:51:48 by julnolle          #+#    #+#             */
-/*   Updated: 2021/04/27 11:21:29 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/04/27 17:20:00 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ typedef struct		s_data
 	int				selected_philo;
 	int				sleep_t;
 	int				max_meals;
-	int				stop;
-	char			pad[4];
+	char			stop;
+	char			pad[7];
 }					t_data;
 
 /*
@@ -56,6 +56,7 @@ void	ft_eat(int id, t_data *data);
 int		ft_print_state(int id, char *action, t_data *data);
 int		ft_print_death(int id, t_data *data);
 int		ft_create_death_thread(t_data *data);
-int		check_max_meals(t_data *data);
+int		ft_create_meal_thread(t_data *data);
+// int		check_max_meals(t_data *data);
 
 #endif

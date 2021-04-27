@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 11:20:45 by julnolle          #+#    #+#             */
-/*   Updated: 2021/04/27 15:46:05 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/04/27 17:09:50 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void	*d_thread(void *arg)
 				elapsed_time = get_time_in_ms() - data->last_meal_time[i];
 			if (elapsed_time > data->die_t)
 			{
-				ft_print_state(i + 1, " died", data);
+				ft_print_state(i + 1, "died", data);
 				data->stop = STOP;
 				return (NULL);
 			}

@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 11:12:56 by julnolle          #+#    #+#             */
-/*   Updated: 2021/04/27 17:03:25 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/04/27 16:40:33 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		ft_init(t_data *data, char const **av, int ac)
 	data->die_t = ft_atoi(av[2]);
 	data->eat_t = ft_atoi(av[3]);
 	data->sleep_t = ft_atoi(av[4]);
-	data->stop = CONTINUE;
+	data->stop = FALSE;
 	if (ac == 6)
 		data->max_meals = ft_atoi(av[5]);
 	else
@@ -64,7 +64,7 @@ int		ft_init(t_data *data, char const **av, int ac)
 int		ft_print_state(int id, char *action, t_data *data)
 {
 	sem_wait(data->display);
-	if (data->stop == STOP)
+	if (data->stop == TRUE)
 	{
 		sem_post(data->display);
 		return (SUCCESS);

@@ -6,27 +6,22 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 16:44:28 by julnolle          #+#    #+#             */
-/*   Updated: 2021/04/27 15:59:29 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/04/27 16:45:59 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_one.h"
+#include "philo_two.h"
 
 static void	*thread_philo(void *arg)
 {
 	t_data	*data;
 	int		id;
-	int		fork_right;
-	int		fork_left;
 
 	data = (t_data *)arg;
-	id = data->selected_philo + 1;
-	fork_right = data->selected_philo;
-	fork_left = id % data->nb;
-	// printf("pos %d: fork_left: %d / fork_right: %d\n", data->selected_philo, fork_left, fork_right);
-	while (data->stop == CONTINUE)
+	id = data->selected_philo;
+	while (data->stop == FALSE)
 	{
-		ft_eat(id, data, fork_right, fork_left);
+		ft_eat(id, data);
 		ft_print_state(id, "is sleeping", data);
 		ft_improved_sleep(data->sleep_t, data->stop);
 		ft_print_state(id, "is thinking", data);
@@ -41,14 +36,14 @@ static int	ft_create_odd_philo_threads(t_data *data)
 	i = 0;
 	while (i < data->nb)
 	{
-		data->selected_philo = i;
+		data->selected_philo = i + 1;
 		if (pthread_create(&data->p_threads[i], NULL, thread_philo, data))
 		{
 			ft_putendl("pthread_create failed");
 			return (FAILURE);
 		}
-		i = i + 2;
 		usleep(500);
+		i = i + 2;
 	}
 	return (SUCCESS);
 }
@@ -60,14 +55,14 @@ static int	ft_create_even_philo_threads(t_data *data)
 	i = 1;
 	while (i < data->nb)
 	{
-		data->selected_philo = i;
+		data->selected_philo = i + 1;
 		if (pthread_create(&data->p_threads[i], NULL, thread_philo, data))
 		{
 			ft_putendl("pthread_create failed");
 			return (FAILURE);
 		}
-		i = i + 2;
 		usleep(500);
+		i = i + 2;
 	}
 	return (SUCCESS);
 }
@@ -108,3 +103,4 @@ int			ft_create_philo_threads(t_data *data)
 		return (FAILURE);
 	return (SUCCESS);
 }
+

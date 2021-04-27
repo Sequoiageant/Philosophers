@@ -5,12 +5,12 @@
 #                                                     +:+ +:+         +:+      #
 #    By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/12/13 14:56:19 by julnolle          #+#    #+#              #
-#    Updated: 2020/08/18 12:27:08 by julnolle         ###   ########.fr        #
+#    Created: 2020/08/16 14:51:18 by julnolle          #+#    #+#              #
+#    Updated: 2021/04/27 11:22:08 by julnolle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= philo_three
+NAME	= philo_two
 
 # ---------------- CC ---------------- #
 
@@ -59,12 +59,19 @@ _YELLOW		= \033[33m
 
 # ---------------- SRC --------------- #
 
-# Debug Sources
-# SRCS += debug.c
+# Common Sources
+SRCS += ft_utils.c
+SRCS += ft_checks.c
+SRCS += ft_itoa.c
+SRCS += ft_strjoin_back.c
+SRCS += philo_utils.c
 
 # Main Sources
 SRCS += main.c
-SRCS += ft_utils.c
+SRCS += philo_two_utils.c
+SRCS += philo_two_states.c
+SRCS += death_check.c
+SRCS += philo_threads.c
 
 vpath %.c ./
 vpath %.c ../common_srcs/
@@ -72,8 +79,10 @@ vpath %.c ../common_srcs/
 # ---------------- INC --------------- #
 
 INCLUDES 	=	../includes/
-HEAD 		= $(INCLUDES)philo.h
-ALL_INC		=  -I$(INCLUDES)
+HEADER 		=	$(INCLUDES)philo.h
+HEADER 		+=	$(INCLUDES)philo_two.h
+ALL_INC		=	-I$(INCLUDES)
+LIB_LINK	=	-lpthread
 
 # ---------------- OBJ --------------- #
 
@@ -88,10 +97,10 @@ fast:
 	$(MAKE) re -j8
 
 $(NAME):	$(OBJS)
-			$(CC) $(CFLAGS) $(OBJS) $(ALL_INC) -o $@
+			$(CC) $(CFLAGS) $(OBJS) $(ALL_INC) $(LIB_LINK) -o $@
 			echo "$(_BOLD)$(_YELLOW)==> $@ linked$(_END)"
 
-$(OBJS): 	$(DIR_OBJS)%.o: %.c $(HEAD) Makefile | $(DIR_OBJS)
+$(OBJS): 	$(DIR_OBJS)%.o: %.c $(HEADER) Makefile | $(DIR_OBJS)
 			$(CC) $(CFLAGS) $(ENV) -c $< -o $@ $(ALL_INC)
 			echo "$(_BOLD)$(_GREEN)--> $@ made$(_END)"
 
@@ -110,4 +119,4 @@ re: fclean
 	$(MAKE)
 
 .PHONY:		all fast clean fclean re
-.SILENT:
+.SILENT:	$(NAME) $(OBJS) $(DIR_OBJS) clean fclean

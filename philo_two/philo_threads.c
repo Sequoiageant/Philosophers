@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 16:44:28 by julnolle          #+#    #+#             */
-/*   Updated: 2020/10/21 11:03:05 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/04/27 17:12:01 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ static void	*thread_philo(void *arg)
 
 	data = (t_data *)arg;
 	id = data->selected_philo;
-	while (data->stop == FALSE)
+	while (data->stop == CONTINUE)
 	{
 		ft_eat(id, data);
-		ft_print_state(id, " is sleeping", data);
+		ft_print_state(id, "is sleeping", data);
 		ft_improved_sleep(data->sleep_t, data->stop);
-		ft_print_state(id, " is thinking", data);
+		ft_print_state(id, "is thinking", data);
 	}
 	return (NULL);
 }
@@ -42,8 +42,8 @@ static int	ft_create_odd_philo_threads(t_data *data)
 			ft_putendl("pthread_create failed");
 			return (FAILURE);
 		}
-		usleep(500);
 		i = i + 2;
+		usleep(500);
 	}
 	return (SUCCESS);
 }
@@ -61,8 +61,8 @@ static int	ft_create_even_philo_threads(t_data *data)
 			ft_putendl("pthread_create failed");
 			return (FAILURE);
 		}
-		usleep(500);
 		i = i + 2;
+		usleep(500);
 	}
 	return (SUCCESS);
 }
