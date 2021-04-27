@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 11:24:40 by julnolle          #+#    #+#             */
-/*   Updated: 2021/04/27 15:28:51 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/04/27 19:05:14 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ void	ft_eat(int id, t_data *data, int right, int left)
 	// }
 	if (pthread_mutex_lock(&data->fork[left]) != 0)
 		return ;
-	ft_print_state(id, "has taken a fork", data);
+	ft_print_state(id, FORK, data);
 	if (pthread_mutex_lock(&data->fork[right]) != 0)
 		return ;
-	ft_print_state(id, "has taken a fork", data);
-	ft_print_state(id, "is eating", data);
+	ft_print_state(id, FORK, data);
+	ft_print_state(id, EAT, data);
 	data->meal_nb[id - 1]++;
 	data->last_meal_time[id - 1] = get_time_in_ms();
 	ft_improved_sleep(data->eat_t, data->stop);

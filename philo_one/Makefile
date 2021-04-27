@@ -6,7 +6,7 @@
 #    By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/16 14:51:18 by julnolle          #+#    #+#              #
-#    Updated: 2021/04/27 15:34:38 by julnolle         ###   ########.fr        #
+#    Updated: 2021/04/27 19:10:27 by julnolle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,7 +71,7 @@ SRCS += philo_utils.c
 SRCS += main.c
 SRCS += philo_one_utils.c
 SRCS += philo_one_states.c
-SRCS += death_check.c
+SRCS += philo_one_checks.c
 SRCS += philo_threads.c
 
 vpath %.c ./

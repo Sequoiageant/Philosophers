@@ -6,13 +6,13 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 11:20:45 by julnolle          #+#    #+#             */
-/*   Updated: 2021/04/27 17:09:50 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/04/27 19:09:49 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-static char	check_max_meals(t_data *data)
+/*static char	check_max_meals(t_data *data)
 {
 	int	i;
 
@@ -55,6 +55,31 @@ int			ft_create_meal_thread(t_data *data)
 		return (FAILURE);
 	}
 	return (SUCCESS);
+}*/
+
+char		check_max_meals(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->nb)
+	{
+		if (data->meal_nb[i] < data->max_meals)
+			return (CONTINUE);
+		i++;
+	}
+	return (STOP);
+}
+
+void 		check_stop(t_data *data, int state)
+{
+	if (state == DIE)
+		data->stop = STOP;
+	if (state == EAT && data->max_meals != UNSET)
+	{
+		if (check_max_meals(data) == STOP)
+			data->stop = STOP;
+	}
 }
 
 static void	*d_thread(void *arg)
@@ -75,7 +100,7 @@ static void	*d_thread(void *arg)
 				elapsed_time = get_time_in_ms() - data->last_meal_time[i];
 			if (elapsed_time > data->die_t)
 			{
-				ft_print_state(i + 1, "died", data);
+				ft_print_state(i + 1, DIE, data);
 				data->stop = STOP;
 				return (NULL);
 			}

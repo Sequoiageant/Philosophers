@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 11:51:48 by julnolle          #+#    #+#             */
-/*   Updated: 2021/04/27 18:34:20 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/04/27 19:12:32 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,8 @@ int		ft_create_philo_threads(t_data *data);
 int		ft_init(t_data *data, char const **av, int ac);
 void	ft_eat(int id, t_data *data);
 int		ft_print_state(int id, int state, t_data *data);
-// int		ft_print_death(int id, t_data *data);
 int		ft_create_death_thread(t_data *data);
-int		ft_create_meal_thread(t_data *data);
+// int		ft_create_meal_thread(t_data *data);
 // int		check_max_meals(t_data *data);
 
 #endif
