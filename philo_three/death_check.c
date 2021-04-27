@@ -6,26 +6,11 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 11:20:45 by julnolle          #+#    #+#             */
-/*   Updated: 2021/04/27 16:40:21 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/04/27 19:31:22 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_two.h"
-
-int		check_max_meals(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->nb)
-	{
-		if (data->meal_nb[i] < data->max_meals)
-			return (FALSE);
-		i++;
-		usleep(10);
-	}
-	return (TRUE);
-}
+#include "philo_three.h"
 
 void	*d_thread(void *arg)
 {
@@ -36,28 +21,24 @@ void	*d_thread(void *arg)
 
 	data = (t_data *)arg;
 	i = 0;
-	while (data->stop == FALSE)
+	while (data->stop == CONTINUE)
 	{
 		i = 0;
 		count = 0;
 		while (i < data->nb)
 		{
-			// memset(&elapsed_time, 0, sizeof(int));
 			if (data->last_meal_time[i] == UNSET)
 				elapsed_time = get_time_in_ms() - data->start_time;
 			else
 				elapsed_time = get_time_in_ms() - data->last_meal_time[i];
 			if (elapsed_time > data->die_t)
 			{
-				ft_print_state(i + 1, "died", data);
-				data->stop = TRUE;
+				ft_print_state(i + 1, DIE, data);
 				return (NULL);
 			}
-			if (data->max_meals != UNSET)
-				data->stop = check_max_meals(data);
 			i++;
 		}
-		usleep(1500);
+		usleep(2000);
 	}
 	return (NULL);
 }

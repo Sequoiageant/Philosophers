@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 12:24:12 by julnolle          #+#    #+#             */
-/*   Updated: 2021/04/27 19:04:27 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/04/27 19:25:36 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_create_mutexes(t_data *data)
 
 	if (pthread_mutex_init(&data->display, NULL) != 0)
 	{
-		ft_putendl("mutex init failed");
+		ft_putendl_fd("mutex init failed", 2);
 		return (FAILURE);
 	}
 	i = 0;
@@ -26,7 +26,7 @@ int	ft_create_mutexes(t_data *data)
 	{
 		if (pthread_mutex_init(&data->fork[i], NULL) != 0)
 		{
-			ft_putendl("mutex init failed");
+			ft_putendl_fd("mutex init failed", 2);
 			return (FAILURE);
 		}
 		++i;
@@ -43,7 +43,7 @@ int	ft_join_philo_threads(t_data *data)
 	{
 		if (pthread_join(data->p_threads[i], NULL))
 		{
-			ft_putendl("pthread_join failed");
+			ft_putendl_fd("pthread_join failed", 2);
 			return (FAILURE);
 		}
 		++i;
@@ -61,14 +61,14 @@ int ft_free_all(t_data *data)
 	{
 		if (pthread_mutex_destroy(&data->fork[i]) != 0)
 		{
-			ft_putendl("mutex destroy failed");
+			ft_putendl_fd("mutex destroy failed", 2);
 			return (FAILURE);
 		}
 		++i;
 	}
 	if (pthread_mutex_destroy(&data->display) != 0)
 	{
-		ft_putendl("mutex destroy failed");
+		ft_putendl_fd("mutex destroy failed", 2);
 		return (FAILURE);
 	}
 	free(data->fork);
@@ -109,6 +109,6 @@ int		main(int ac, char const **av)
 		}
 	}
 	else
-		ft_putendl("Wrong nbr of arguments");
+		ft_putendl_fd("Wrong nbr of arguments", 2);
 	return (0);
 }

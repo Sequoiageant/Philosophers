@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 12:47:11 by julnolle          #+#    #+#             */
-/*   Updated: 2020/10/20 12:48:38 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/04/27 19:29:38 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ int			ft_check_args(char const **av)
 	{
 		if (!arg_isdigit(av[i]))
 		{
-			ft_putendl("All arguments must be digit");
+			ft_putendl_fd("All arguments must be digit", 2);
 			return (FAILURE);
 		}
 		if (ft_strlen(av[i]) > 9)
 		{
-			ft_putendl("One argument is too large");
+			ft_putendl_fd("One argument is too large", 2);
 			return (FAILURE);
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 14:47:17 by julnolle          #+#    #+#             */
-/*   Updated: 2021/04/27 18:28:59 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/04/27 19:28:49 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,9 @@ enum	e_state
 
 int			ft_atoi(const char *str);
 size_t		ft_strlen(const char *str);
-int			ft_putchar(char c);
-void		ft_putstr(char const *s);
-void		ft_putendl(char const *s);
-int			ft_putendl_fd(char const *s, int fd);
+void		ft_putendl_fd(char const *s, int fd);
 int			ft_check_args(char const **av);
-// void		ft_strjoin_back(char *back, char **src);
-// char		*ft_itoa(long n);
-// void	print_args(char const **av);
-long int	get_time_in_ms(void);
+time_t		get_time_in_ms(void);
 void		ft_improved_sleep(int delay_ms, char stop);
 
 #endif

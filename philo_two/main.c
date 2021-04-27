@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 12:24:12 by julnolle          #+#    #+#             */
-/*   Updated: 2021/04/27 18:22:09 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/04/27 19:35:45 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ int	ft_create_sem(t_data *data)
 	data->forks = sem_open("/forks", O_CREAT | O_EXCL, S_IRWXU, data->nb);
 	if (data->forks == SEM_FAILED)
 	{
-		ft_putendl(strerror(errno));
+		ft_putendl_fd("sem_open failed", 2);
 		return (FAILURE);
 	}
 	data->display = sem_open("/display", O_CREAT | O_EXCL, S_IRWXU, 1);
 	if (data->display == SEM_FAILED)
 	{
-		ft_putendl(strerror(errno));
+		ft_putendl_fd("sem_open failed", 2);
 		return (FAILURE);
 	}
 	return (SUCCESS);
@@ -40,7 +40,7 @@ int	ft_join_philo_threads(t_data *data)
 	{
 		if (pthread_join(data->p_threads[i], NULL))
 		{
-			ft_putendl("pthread_join failed");
+			ft_putendl_fd("pthread_join failed", 2);
 			return (FAILURE);
 		}
 		i++;
@@ -53,12 +53,12 @@ int ft_free_all(t_data *data)
 {
 	if (sem_close(data->forks) || sem_close(data->display))
 	{
-		ft_putendl("sem_close failed");
+		ft_putendl_fd("sem_close failed", 2);
 		return (FAILURE);
 	}
 	if (sem_unlink("/forks") < 0 || sem_unlink("/display") < 0) 
 	{
-		ft_putendl("sem_unlink failed");
+		ft_putendl_fd("sem_unlink failed", 2);
 		return (FAILURE);
 	}
 	free(data->last_meal_time);
@@ -100,6 +100,6 @@ int		main(int ac, char const **av)
 		}
 	}
 	else
-		ft_putendl("Wrong nbr of arguments");
+		ft_putendl_fd("Wrong nbr of arguments", 2);
 	return (0);
 }

@@ -6,55 +6,11 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 11:20:45 by julnolle          #+#    #+#             */
-/*   Updated: 2021/04/27 18:43:09 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/04/27 19:31:27 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_two.h"
-
-/*static char	check_max_meals(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->nb)
-	{
-		if (data->meal_nb[i] < data->max_meals)
-			return (CONTINUE);
-		++i;
-		// usleep(10);
-	}
-	data->stop = STOP;
-	return (STOP);
-}
-
-static void	*m_thread(void *arg)
-{
-	t_data	*data;
-
-	data = (t_data *)arg;
-	while (data->stop == CONTINUE)
-	{
-		check_max_meals(data);
-		usleep(10);
-	}
-	return (NULL);
-}*/
-
-/*char	check_max_meals(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->nb)
-	{
-		if (data->meal_nb[i] < data->max_meals)
-			return (CONTINUE);
-		i++;
-		usleep(10);
-	}
-	return (STOP);
-}*/
 
 void	*d_thread(void *arg)
 {

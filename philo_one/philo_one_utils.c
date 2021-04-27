@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 11:12:56 by julnolle          #+#    #+#             */
-/*   Updated: 2021/04/27 19:09:16 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/04/27 19:26:15 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int			ft_init(t_data *data, char const **av, int ac)
 	data->nb = ft_atoi(av[1]);
 	if (data->nb < 2)
 	{
-		ft_putendl("The simulation needs at least 2 philosophers to run");
+		ft_putendl_fd("The simulation needs at least 2 philosophers to run", 2);
 		return (FAILURE);
 	}
 	data->selected_philo = 0;
@@ -82,7 +82,7 @@ int			ft_print_state(int id, int state, t_data *data)
 {
 	if (pthread_mutex_lock(&data->display) != 0)
 	{
-		ft_putendl("mutex lock failed");
+		ft_putendl_fd("mutex lock failed", 2);
 		return (FAILURE);
 	}
 	if (data->stop == STOP)
@@ -95,7 +95,7 @@ int			ft_print_state(int id, int state, t_data *data)
 	check_stop(data, state);
 	if (pthread_mutex_unlock(&data->display) != 0)
 	{
-		ft_putendl("mutex unlock failed");
+		ft_putendl_fd("mutex unlock failed", 2);
 		return (FAILURE);
 	}
 	return (SUCCESS);
@@ -108,7 +108,7 @@ int		ft_print_state(int id, char *action, t_data *data)
 
 	if (pthread_mutex_lock(&data->display) != 0)
 	{
-		ft_putendl("mutex lock failed");
+		ft_putendl_fd("mutex lock failed", 2);
 		return (FAILURE);
 	}
 	if (data->stop == STOP)
@@ -121,11 +121,11 @@ int		ft_print_state(int id, char *action, t_data *data)
 	ft_strjoin_back(" ", &output);
 	ft_strjoin_back(p_id, &output);
 	ft_strjoin_back(action, &output);
-	ft_putendl(output);
+	ft_putendl_fd(output, 2);
 	// check_max_meals(data);
 	if (pthread_mutex_unlock(&data->display) != 0)
 	{
-		ft_putendl("mutex unlock failed");
+		ft_putendl_fd("mutex unlock failed", 2);
 		return (FAILURE);
 	}
 	free (p_id);
