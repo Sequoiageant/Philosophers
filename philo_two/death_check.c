@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 11:20:45 by julnolle          #+#    #+#             */
-/*   Updated: 2021/04/27 17:24:56 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/04/27 18:13:25 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static char	check_max_meals(t_data *data)
 		if (data->meal_nb[i] < data->max_meals)
 			return (CONTINUE);
 		++i;
-		usleep(10);
 	}
 	return (STOP);
 }
@@ -32,10 +31,10 @@ static void	*m_thread(void *arg)
 	t_data	*data;
 
 	data = (t_data *)arg;
-	while (data->stop == CONTINUE)
+	while (1)
 	{
 		data->stop = check_max_meals(data);
-		usleep(10);
+		// usleep(10);
 	}
 	return (NULL);
 }
