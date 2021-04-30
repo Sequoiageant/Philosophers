@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_one.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 11:51:48 by julnolle          #+#    #+#             */
-/*   Updated: 2021/04/27 19:13:17 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/04/30 10:36:41 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 typedef struct		s_data
 {
 	pthread_mutex_t	display;
+	pthread_mutex_t	select;
 	pthread_mutex_t	*fork;
 	pthread_t		*p_threads;
 	time_t			*last_meal_time;

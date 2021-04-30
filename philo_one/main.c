@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 12:24:12 by julnolle          #+#    #+#             */
-/*   Updated: 2021/04/27 19:25:36 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/04/30 10:40:48 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ int	ft_create_mutexes(t_data *data)
 	int	i;
 
 	if (pthread_mutex_init(&data->display, NULL) != 0)
+	{
+		ft_putendl_fd("mutex init failed", 2);
+		return (FAILURE);
+	}
+	if (pthread_mutex_init(&data->select, NULL) != 0)
 	{
 		ft_putendl_fd("mutex init failed", 2);
 		return (FAILURE);
@@ -67,6 +72,11 @@ int ft_free_all(t_data *data)
 		++i;
 	}
 	if (pthread_mutex_destroy(&data->display) != 0)
+	{
+		ft_putendl_fd("mutex destroy failed", 2);
+		return (FAILURE);
+	}
+	if (pthread_mutex_destroy(&data->select) != 0)
 	{
 		ft_putendl_fd("mutex destroy failed", 2);
 		return (FAILURE);

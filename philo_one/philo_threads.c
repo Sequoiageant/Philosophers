@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 16:44:28 by julnolle          #+#    #+#             */
-/*   Updated: 2021/04/27 19:26:45 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/04/30 11:19:06 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,12 @@ static void	*thread_philo(void *arg)
 	data = (t_data *)arg;
 	id = data->selected_philo + 1;
 	fork_right = data->selected_philo;
+	if (pthread_mutex_unlock(&data->select) != 0)
+	{
+		ft_putendl_fd("mutex unlock failed", 2);
+		return (NULL);
+	}
 	fork_left = id % data->nb;
-	// printf("pos %d: fork_left: %d / fork_right: %d\n", data->selected_philo, fork_left, fork_right);
 	while (data->stop == CONTINUE)
 	{
 		ft_eat(id, data, fork_right, fork_left);
@@ -34,13 +38,21 @@ static void	*thread_philo(void *arg)
 	return (NULL);
 }
 
-static int	ft_create_odd_philo_threads(t_data *data)
+static int	ft_create_p_threads(t_data *data, char type)
 {
 	int	i;
 
-	i = 0;
+	if (type == ODD)
+		i = 0;
+	if (type == EVEN)
+		i = 1;
 	while (i < data->nb)
 	{
+		if (pthread_mutex_lock(&data->select) != 0)
+		{
+			ft_putendl_fd("mutex lock failed", 2);
+			return (FAILURE);
+		}
 		data->selected_philo = i;
 		if (pthread_create(&data->p_threads[i], NULL, thread_philo, data))
 		{
@@ -48,26 +60,7 @@ static int	ft_create_odd_philo_threads(t_data *data)
 			return (FAILURE);
 		}
 		i = i + 2;
-		usleep(500);
-	}
-	return (SUCCESS);
-}
-
-static int	ft_create_even_philo_threads(t_data *data)
-{
-	int	i;
-
-	i = 1;
-	while (i < data->nb)
-	{
-		data->selected_philo = i;
-		if (pthread_create(&data->p_threads[i], NULL, thread_philo, data))
-		{
-			ft_putendl_fd("pthread_create failed", 2);
-			return (FAILURE);
-		}
-		i = i + 2;
-		usleep(500);
+		// usleep(500);
 	}
 	return (SUCCESS);
 }
@@ -96,7 +89,7 @@ int			ft_create_philo_threads(t_data *data)
 	data->p_threads = malloc((data->nb) * sizeof(pthread_t));
 	if (data->p_threads == NULL)
 		return (FAILURE);
-	if (ft_create_odd_philo_threads(data) == FAILURE)
+	if (ft_create_p_threads(data, ODD) == FAILURE)
 		return (FAILURE);
 	while (1)
 	{
@@ -104,7 +97,7 @@ int			ft_create_philo_threads(t_data *data)
 			break ;
 		usleep(10);
 	}
-	if (ft_create_even_philo_threads(data) == FAILURE)
+	if (ft_create_p_threads(data, EVEN) == FAILURE)
 		return (FAILURE);
 	return (SUCCESS);
 }

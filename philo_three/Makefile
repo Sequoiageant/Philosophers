@@ -6,7 +6,7 @@
 #    By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/16 14:51:18 by julnolle          #+#    #+#              #
-#    Updated: 2021/04/27 19:39:42 by julnolle         ###   ########.fr        #
+#    Updated: 2021/04/27 19:40:25 by julnolle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,7 +78,7 @@ vpath %.c ../common_srcs/
 
 INCLUDES 	=	../includes/
 HEADER 		=	$(INCLUDES)philo.h
-HEADER 		+=	$(INCLUDES)philo_two.h
+HEADER 		+=	$(INCLUDES)philo_three.h
 ALL_INC		=	-I$(INCLUDES)
 LIB_LINK	=	-lpthread
 
