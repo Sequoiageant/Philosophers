@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 16:44:28 by julnolle          #+#    #+#             */
-/*   Updated: 2021/04/30 11:34:44 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/04/30 17:10:24 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	*thread_philo(void *arg)
 	return (NULL);
 }
 
-static int	ft_create_p_threads(t_data *data, char type)
+/*static int	ft_create_p_threads(t_data *data, char type)
 {
 	int	i;
 
@@ -87,5 +87,29 @@ int			ft_create_philo_threads(t_data *data)
 	}
 	if (ft_create_p_threads(data, EVEN) == FAILURE)
 		return (FAILURE);
+	return (SUCCESS);
+}*/
+
+
+int			ft_create_philo_threads(t_data *data)
+{
+	int i;
+
+	data->p_threads = malloc((data->nb) * sizeof(pthread_t));
+	if (data->p_threads == NULL)
+		return (FAILURE);
+	i = 0;
+	while (i < data->nb)
+	{
+		sem_wait(data->display);
+		data->selected_philo = i + 1;
+		if (pthread_create(&data->p_threads[i], NULL, thread_philo, data))
+		{
+			ft_putendl_fd("pthread_create failed", 2);
+			return (FAILURE);
+		}
+		i++;
+	}
+
 	return (SUCCESS);
 }
