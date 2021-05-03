@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 11:51:48 by julnolle          #+#    #+#             */
-/*   Updated: 2021/04/27 19:12:32 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/05/03 15:39:02 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <semaphore.h>
 # include <fcntl.h>
 # include <sys/stat.h>
-# include <errno.h>
 
 /*
 ** --------------------------------- Defines ---------------------------------
@@ -37,13 +36,13 @@ typedef struct		s_data
 	time_t			start_time;
 	time_t			die_t;
 	time_t			eat_t;
+	time_t			sleep_t;
 	int				*meal_nb;
 	int				nb;
 	int				selected_philo;
-	int				sleep_t;
 	int				max_meals;
 	char			stop;
-	char			pad[7];
+	char			pad[3];
 }					t_data;
 
 /*

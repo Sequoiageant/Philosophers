@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
+/*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 12:24:12 by julnolle          #+#    #+#             */
-/*   Updated: 2021/04/30 10:40:48 by anonymous        ###   ########.fr       */
+/*   Updated: 2021/04/30 14:12:38 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,6 @@ int	 philo_one(t_data *data)
 		return (FAILURE);
 	if (ft_create_death_thread(data) == FAILURE)
 		return (FAILURE);
-	// if (data->max_meals != UNSET)
-	// {
-	// 	if (ft_create_meal_thread(data) == FAILURE)
-	// 		return (FAILURE);
-	// }
 	if (ft_join_philo_threads(data) == FAILURE)
 		return (FAILURE);
 	ft_free_all(data);

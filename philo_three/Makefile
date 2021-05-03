@@ -6,7 +6,7 @@
 #    By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/16 14:51:18 by julnolle          #+#    #+#              #
-#    Updated: 2021/04/27 19:40:25 by julnolle         ###   ########.fr        #
+#    Updated: 2021/04/30 18:35:43 by julnolle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,10 +66,10 @@ SRCS += philo_utils.c
 
 # Main Sources
 SRCS += main.c
-SRCS += philo_two_utils.c
-SRCS += philo_two_states.c
+SRCS += philo_three_utils.c
+SRCS += philo_three_states.c
 SRCS += death_check.c
-SRCS += philo_threads.c
+SRCS += philo_procs.c
 
 vpath %.c ./
 vpath %.c ../common_srcs/

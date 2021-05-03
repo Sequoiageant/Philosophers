@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 11:20:45 by julnolle          #+#    #+#             */
-/*   Updated: 2021/04/27 19:31:22 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/05/03 16:50:15 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,20 @@
 void	*d_thread(void *arg)
 {
 	t_data	*data;
-	int		i;
-	int		count;
-	int		elapsed_time;
+	time_t	elapsed_time;
 
 	data = (t_data *)arg;
-	i = 0;
 	while (data->stop == CONTINUE)
 	{
-		i = 0;
-		count = 0;
-		while (i < data->nb)
+		if (data->last_meal_time == UNSET)
+			elapsed_time = get_time_in_ms() - data->start_time;
+		else
+			elapsed_time = get_time_in_ms() - data->last_meal_time;
+		if (elapsed_time > data->die_t)
 		{
-			if (data->last_meal_time[i] == UNSET)
-				elapsed_time = get_time_in_ms() - data->start_time;
-			else
-				elapsed_time = get_time_in_ms() - data->last_meal_time[i];
-			if (elapsed_time > data->die_t)
-			{
-				ft_print_state(i + 1, DIE, data);
-				return (NULL);
-			}
-			i++;
+			printf("%s\n", "DEATH");
+			ft_print_state(data, DIE);
+			return (NULL);
 		}
 		usleep(2000);
 	}
