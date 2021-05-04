@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 11:20:45 by julnolle          #+#    #+#             */
-/*   Updated: 2021/04/27 19:18:58 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/05/04 18:51:19 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char		check_max_meals(t_data *data)
 	return (STOP);
 }
 
-void 		check_stop(t_data *data, int state)
+void		check_stop(t_data *data, int state)
 {
 	if (state == DIE)
 		data->stop = STOP;

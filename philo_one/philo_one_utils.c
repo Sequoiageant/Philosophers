@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 11:12:56 by julnolle          #+#    #+#             */
-/*   Updated: 2021/04/27 19:26:15 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/05/04 18:52:25 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,36 +100,3 @@ int			ft_print_state(int id, int state, t_data *data)
 	}
 	return (SUCCESS);
 }
-/*
-int		ft_print_state(int id, char *action, t_data *data)
-{
-	char	*p_id;
-	char	*output;
-
-	if (pthread_mutex_lock(&data->display) != 0)
-	{
-		ft_putendl_fd("mutex lock failed", 2);
-		return (FAILURE);
-	}
-	if (data->stop == STOP)
-	{
-		pthread_mutex_unlock(&data->display);
-		return (SUCCESS);
-	}
-	output = ft_itoa(get_time_in_ms() - data->start_time);
-	p_id = ft_itoa(id);
-	ft_strjoin_back(" ", &output);
-	ft_strjoin_back(p_id, &output);
-	ft_strjoin_back(action, &output);
-	ft_putendl_fd(output, 2);
-	// check_max_meals(data);
-	if (pthread_mutex_unlock(&data->display) != 0)
-	{
-		ft_putendl_fd("mutex unlock failed", 2);
-		return (FAILURE);
-	}
-	free (p_id);
-	free (output);
-	return (SUCCESS);
-}
-*/

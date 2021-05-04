@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 11:51:48 by julnolle          #+#    #+#             */
-/*   Updated: 2021/05/03 18:25:04 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/05/04 19:02:26 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,13 @@
 # include <sys/stat.h>
 # include <sys/wait.h>
 
-# define FULL 'f'
-
 /*
 ** --------------------------------- Defines ---------------------------------
 */
 
+# define RUN	0
+# define DEAD	1
+# define FULL	2
 
 /*
 ** -------------------------------- Structures -------------------------------
@@ -34,7 +35,7 @@ typedef struct		s_data
 {
 	sem_t			*forks;
 	sem_t			*display;
-	sem_t			*kill_all;
+	sem_t			*all_full;
 	pid_t			*pids;
 	time_t			last_meal_time;
 	time_t			start_time;
@@ -45,19 +46,19 @@ typedef struct		s_data
 	int				nb;
 	int				id;
 	int				max_meals;
-	char			stop;
-	// char			pad[4];
+	int				stop;
+	char			pad[4];
 }					t_data;
 
 /*
 ** -------------------------------- Prototypes -------------------------------
 */
 
-int		ft_create_philo_processes(t_data *data);
-int		ft_init(t_data *data, char const **av, int ac);
-void	ft_eat(t_data *data);
-int		ft_print_state(t_data *data, int state);
-int		ft_create_death_thread(t_data *data);
-void	ft_improved_wait(int delay_ms);
+int					ft_create_philo_processes(t_data *data);
+int					ft_init(t_data *data, char const **av, int ac);
+void				ft_eat(t_data *data);
+int					ft_print_state(t_data *data, int state);
+int					ft_create_death_thread(t_data *data);
+void				ft_improved_wait(int delay_ms);
 
 #endif

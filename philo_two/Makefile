@@ -6,7 +6,7 @@
 #    By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/16 14:51:18 by julnolle          #+#    #+#              #
-#    Updated: 2021/04/27 19:36:10 by julnolle         ###   ########.fr        #
+#    Updated: 2021/05/04 18:01:00 by julnolle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -99,7 +99,7 @@ $(NAME):	$(OBJS)
 			echo "$(_BOLD)$(_YELLOW)==> $@ linked$(_END)"
 
 $(OBJS): 	$(DIR_OBJS)%.o: %.c $(HEADER) Makefile | $(DIR_OBJS)
-			$(CC) $(CFLAGS) $(ENV) -c $< -o $@ $(ALL_INC)
+			$(CC) $(CFLAGS) -c $< -o $@ $(ALL_INC)
 			echo "$(_BOLD)$(_GREEN)--> $@ made$(_END)"
 
 $(DIR_OBJS):

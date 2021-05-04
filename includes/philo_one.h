@@ -3,22 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   philo_one.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
+/*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 11:51:48 by julnolle          #+#    #+#             */
-/*   Updated: 2021/04/30 10:36:41 by anonymous        ###   ########.fr       */
+/*   Updated: 2021/05/04 19:01:49 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_ONE_H
 # define PHILO_ONE_H
 
-#include "philo.h"
-
-/*
-** --------------------------------- Defines ---------------------------------
-*/
-
+# include "philo.h"
 
 /*
 ** -------------------------------- Structures -------------------------------
@@ -47,13 +42,12 @@ typedef struct		s_data
 ** -------------------------------- Prototypes -------------------------------
 */
 
-int		ft_create_philo_threads(t_data *data);
-int		ft_init(t_data *data, char const **av, int ac);
-void	ft_eat(int id, t_data *data, int right, int left);
-int		ft_print_state(int id, int state, t_data *data);
-int		ft_create_death_thread(t_data *data);
-char	check_max_meals(t_data *data);
-void 	check_stop(t_data *data, int state);
-
+int					ft_create_philo_threads(t_data *data);
+int					ft_init(t_data *data, char const **av, int ac);
+void				ft_eat(int id, t_data *data, int right, int left);
+int					ft_print_state(int id, int state, t_data *data);
+int					ft_create_death_thread(t_data *data);
+char				check_max_meals(t_data *data);
+void				check_stop(t_data *data, int state);
 
 #endif

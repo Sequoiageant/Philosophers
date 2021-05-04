@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 12:24:12 by julnolle          #+#    #+#             */
-/*   Updated: 2021/04/27 19:35:45 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/05/04 18:58:46 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,14 @@ int	ft_join_philo_threads(t_data *data)
 	return (SUCCESS);
 }
 
-int ft_free_all(t_data *data)
+int	ft_free_all(t_data *data)
 {
 	if (sem_close(data->forks) || sem_close(data->display))
 	{
 		ft_putendl_fd("sem_close failed", 2);
 		return (FAILURE);
 	}
-	if (sem_unlink("/forks") < 0 || sem_unlink("/display") < 0) 
+	if (sem_unlink("/forks") < 0 || sem_unlink("/display") < 0)
 	{
 		ft_putendl_fd("sem_unlink failed", 2);
 		return (FAILURE);
@@ -66,7 +66,7 @@ int ft_free_all(t_data *data)
 	return (SUCCESS);
 }
 
-int	 philo_two(t_data *data)
+int	philo_two(t_data *data)
 {
 	if (ft_create_sem(data) == FAILURE)
 		return (FAILURE);
@@ -76,18 +76,13 @@ int	 philo_two(t_data *data)
 		return (FAILURE);
 	if (ft_create_death_thread(data) == FAILURE)
 		return (FAILURE);
-	// if (data->max_meals != UNSET)
-	// {
-	// 	if (ft_create_meal_thread(data) == FAILURE)
-	// 		return (FAILURE);
-	// }
 	if (ft_join_philo_threads(data) == FAILURE)
 		return (FAILURE);
 	ft_free_all(data);
 	return (SUCCESS);
 }
 
-int		main(int ac, char const **av)
+int	main(int ac, char const **av)
 {
 	t_data	data;
 

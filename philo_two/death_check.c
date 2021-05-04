@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 11:20:45 by julnolle          #+#    #+#             */
-/*   Updated: 2021/04/27 19:31:27 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/05/04 18:56:59 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	*d_thread(void *arg)
 {
 	t_data	*data;
 	int		i;
-	int		count;
 	int		elapsed_time;
 
 	data = (t_data *)arg;
@@ -24,7 +23,6 @@ void	*d_thread(void *arg)
 	while (data->stop == CONTINUE)
 	{
 		i = 0;
-		count = 0;
 		while (i < data->nb)
 		{
 			if (data->last_meal_time[i] == UNSET)

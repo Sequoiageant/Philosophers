@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 12:24:12 by julnolle          #+#    #+#             */
-/*   Updated: 2021/04/30 14:12:38 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/05/04 18:54:48 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,19 +57,18 @@ int	ft_join_philo_threads(t_data *data)
 	return (SUCCESS);
 }
 
-int ft_free_all(t_data *data)
+int	ft_free_all(t_data *data)
 {
 	int	i;
 
 	i = 0;
 	while (i < data->nb)
 	{
-		if (pthread_mutex_destroy(&data->fork[i]) != 0)
+		if (pthread_mutex_destroy(&data->fork[i++]) != 0)
 		{
 			ft_putendl_fd("mutex destroy failed", 2);
 			return (FAILURE);
 		}
-		++i;
 	}
 	if (pthread_mutex_destroy(&data->display) != 0)
 	{
@@ -87,7 +86,7 @@ int ft_free_all(t_data *data)
 	return (SUCCESS);
 }
 
-int	 philo_one(t_data *data)
+int	philo_one(t_data *data)
 {
 	if (ft_create_mutexes(data) == FAILURE)
 		return (FAILURE);
@@ -101,7 +100,7 @@ int	 philo_one(t_data *data)
 	return (SUCCESS);
 }
 
-int		main(int ac, char const **av)
+int	main(int ac, char const **av)
 {
 	t_data	data;
 

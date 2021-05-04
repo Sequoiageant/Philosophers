@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 11:24:40 by julnolle          #+#    #+#             */
-/*   Updated: 2021/05/03 16:45:10 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/05/04 18:49:09 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ void	ft_improved_wait(int delay_ms)
 void	ft_eat(t_data *data)
 {
 	sem_wait(data->forks);
-	ft_print_state(data, FORK);
 	sem_wait(data->forks);
 	ft_print_state(data, FORK);
-	ft_print_state(data, EAT);	
+	ft_print_state(data, FORK);
 	data->meal_nb++;
+	ft_print_state(data, EAT);
 	data->last_meal_time = get_time_in_ms();
 	ft_improved_wait(data->eat_t);
 	sem_post(data->forks);

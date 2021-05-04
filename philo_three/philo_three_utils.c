@@ -6,36 +6,11 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 11:12:56 by julnolle          #+#    #+#             */
-/*   Updated: 2021/05/03 18:27:31 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/05/04 18:48:11 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_three.h"
-/*
-int			ft_malloc_datas(t_data *data)
-{
-	int	i;
-
-	data->last_meal_time = NULL;
-	data->meal_nb = NULL;
-	if (data->nb > 1)
-	{
-		data->last_meal_time = malloc(sizeof(time_t) * data->nb);
-		data->meal_nb = malloc(sizeof(int) * data->nb);
-		if (data->last_meal_time && data->meal_nb)
-		{
-			i = 0;
-			while (i < data->nb)
-			{
-				data->last_meal_time[i] = UNSET;
-				data->meal_nb[i] = 0;
-				i++;
-			}
-			return (SUCCESS);
-		}
-	}
-	return (FAILURE);
-}*/
 
 int			ft_init(t_data *data, char const **av, int ac)
 {
@@ -53,7 +28,7 @@ int			ft_init(t_data *data, char const **av, int ac)
 	data->sleep_t = ft_atoi(av[4]);
 	data->last_meal_time = UNSET;
 	data->meal_nb = 0;
-	data->stop = CONTINUE;
+	data->stop = RUN;
 	if (ac == 6)
 		data->max_meals = ft_atoi(av[5]);
 	else
@@ -82,16 +57,16 @@ int			ft_print_state(t_data *data, int state)
 	sem_wait(data->display);
 	printf("%ld %d %s\n",
 		get_time_in_ms() - data->start_time, data->id, get_action(state));
-	sem_post(data->display);
 	if (state == DIE)
 	{
-		data->stop = STOP;
-		// return (SUCCESS);
+		data->stop = DEAD;
+		return (SUCCESS);
 	}
 	if (state == EAT && data->max_meals != UNSET)
 	{
 		if (data->meal_nb >= data->max_meals)
 			data->stop = FULL;
 	}
+	sem_post(data->display);
 	return (SUCCESS);
 }
