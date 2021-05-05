@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 16:44:28 by julnolle          #+#    #+#             */
-/*   Updated: 2021/05/04 18:59:00 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/05/05 11:47:21 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	*thread_philo(void *arg)
 
 	data = (t_data *)arg;
 	id = data->selected_philo;
-	sem_post(data->display);
+	sem_post(data->start);
 	while (data->stop == CONTINUE)
 	{
 		ft_eat(id, data);
@@ -40,7 +40,7 @@ int			ft_create_philo_threads(t_data *data)
 	i = 0;
 	while (i < data->nb)
 	{
-		sem_wait(data->display);
+		sem_wait(data->start);
 		data->selected_philo = i + 1;
 		if (pthread_create(&data->p_threads[i], NULL, thread_philo, data))
 		{

@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 11:51:48 by julnolle          #+#    #+#             */
-/*   Updated: 2021/05/05 10:53:18 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/05/05 11:41:59 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ typedef struct		s_data
 {
 	sem_t			*forks;
 	sem_t			*display;
-	sem_t			*kill_all;
 	pid_t			*pids;
 	time_t			last_meal_time;
 	time_t			start_time;
