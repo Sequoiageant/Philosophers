@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 11:51:48 by julnolle          #+#    #+#             */
-/*   Updated: 2021/05/04 19:02:26 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/05/05 10:53:18 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct		s_data
 {
 	sem_t			*forks;
 	sem_t			*display;
-	sem_t			*all_full;
+	sem_t			*kill_all;
 	pid_t			*pids;
 	time_t			last_meal_time;
 	time_t			start_time;
@@ -57,7 +57,7 @@ typedef struct		s_data
 int					ft_create_philo_processes(t_data *data);
 int					ft_init(t_data *data, char const **av, int ac);
 void				ft_eat(t_data *data);
-int					ft_print_state(t_data *data, int state);
+void				ft_print_state(t_data *data, int state);
 int					ft_create_death_thread(t_data *data);
 void				ft_improved_wait(int delay_ms);
 

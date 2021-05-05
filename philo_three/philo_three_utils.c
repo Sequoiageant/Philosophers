@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 11:12:56 by julnolle          #+#    #+#             */
-/*   Updated: 2021/05/04 18:48:11 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/05/05 10:54:19 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,17 @@ static char	*get_action(int state)
 		return ("died");
 }
 
-int			ft_print_state(t_data *data, int state)
+void		ft_print_state(t_data *data, int state)
 {
+	if (data->stop == FULL)
+		return ;
 	sem_wait(data->display);
 	printf("%ld %d %s\n",
 		get_time_in_ms() - data->start_time, data->id, get_action(state));
 	if (state == DIE)
 	{
 		data->stop = DEAD;
-		return (SUCCESS);
+		return ;
 	}
 	if (state == EAT && data->max_meals != UNSET)
 	{
@@ -68,5 +70,5 @@ int			ft_print_state(t_data *data, int state)
 			data->stop = FULL;
 	}
 	sem_post(data->display);
-	return (SUCCESS);
+	return ;
 }

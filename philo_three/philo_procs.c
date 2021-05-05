@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 16:44:28 by julnolle          #+#    #+#             */
-/*   Updated: 2021/05/04 18:48:39 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/05/05 10:58:32 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	process_philo(t_data *data)
 	exit(data->stop);
 }
 
-void		kill_all(t_data *data)
+static void	kill_all(t_data *data)
 {
 	int i;
 
@@ -37,7 +37,7 @@ void		kill_all(t_data *data)
 	}
 }
 
-void		handle_end(t_data *data)
+static void	handle_end(t_data *data)
 {
 	int i;
 	int status;
