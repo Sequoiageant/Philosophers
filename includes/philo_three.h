@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 11:51:48 by julnolle          #+#    #+#             */
-/*   Updated: 2021/05/05 11:55:11 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/05/05 11:57:09 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <sys/stat.h>
 # include <sys/wait.h>
 # include <sys/types.h>
+# include <signal.h>
 
 /*
 ** --------------------------------- Defines ---------------------------------
