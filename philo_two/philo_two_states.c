@@ -6,13 +6,13 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 11:24:40 by julnolle          #+#    #+#             */
-/*   Updated: 2021/05/05 15:39:04 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/05/05 15:42:20 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_two.h"
 
-static int	check_priority(int id, t_data *data)
+/*static int	check_priority(int id, t_data *data)
 {
 	int i;
 
@@ -27,14 +27,14 @@ static int	check_priority(int id, t_data *data)
 	}
 	return (TRUE);
 }
-
+*/
 void		ft_eat(int id, t_data *data)
 {
-	while (data->stop == CONTINUE)
-	{
-		if (check_priority(id - 1, data) == TRUE)
-			break ;
-	}
+	// while (data->stop == CONTINUE)
+	// {
+	// 	if (check_priority(id - 1, data) == TRUE)
+	// 		break ;
+	// }
 	sem_wait(data->forks);
 	sem_wait(data->forks);
 	ft_print_state(id, FORK, data);
