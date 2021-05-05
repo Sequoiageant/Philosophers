@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 12:24:12 by julnolle          #+#    #+#             */
-/*   Updated: 2021/05/05 11:46:44 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/05/05 15:26:16 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,16 @@ int	ft_join_philo_threads(t_data *data)
 
 int	ft_free_all(t_data *data)
 {
-	if (sem_close(data->forks) || sem_close(data->display) || sem_close(data->start))
+	if (sem_close(data->forks)
+		|| sem_close(data->display)
+		|| sem_close(data->start))
 	{
 		ft_putendl_fd("sem_close failed", 2);
 		return (FAILURE);
 	}
-	if (sem_unlink("/forks") < 0 || sem_unlink("/display") < 0 || sem_unlink("/start") < 0)
+	if (sem_unlink("/forks") < 0
+		|| sem_unlink("/display") < 0
+		|| sem_unlink("/start") < 0)
 	{
 		ft_putendl_fd("sem_unlink failed", 2);
 		return (FAILURE);

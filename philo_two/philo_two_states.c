@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 11:24:40 by julnolle          #+#    #+#             */
-/*   Updated: 2021/05/04 18:57:42 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/05/05 15:39:04 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void		ft_eat(int id, t_data *data)
 			break ;
 	}
 	sem_wait(data->forks);
-	ft_print_state(id, FORK, data);
 	sem_wait(data->forks);
+	ft_print_state(id, FORK, data);
 	ft_print_state(id, FORK, data);
 	data->meal_nb[id - 1]++;
 	ft_print_state(id, EAT, data);
