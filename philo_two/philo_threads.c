@@ -6,11 +6,25 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 16:44:28 by julnolle          #+#    #+#             */
-/*   Updated: 2021/05/05 11:47:21 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/05/05 15:55:45 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_two.h"
+
+static void	ft_eat(int id, t_data *data)
+{
+	sem_wait(data->forks);
+	sem_wait(data->forks);
+	ft_print_state(id, FORK, data);
+	ft_print_state(id, FORK, data);
+	data->meal_nb[id - 1]++;
+	ft_print_state(id, EAT, data);
+	data->last_meal_time[id - 1] = get_time_in_ms();
+	ft_improved_sleep(data->eat_t, data->stop);
+	sem_post(data->forks);
+	sem_post(data->forks);
+}
 
 static void	*thread_philo(void *arg)
 {
@@ -47,7 +61,7 @@ int			ft_create_philo_threads(t_data *data)
 			ft_putendl_fd("pthread_create failed", 2);
 			return (FAILURE);
 		}
-		i++;
+		++i;
 	}
 	return (SUCCESS);
 }

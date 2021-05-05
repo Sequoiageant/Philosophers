@@ -6,13 +6,13 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 11:12:56 by julnolle          #+#    #+#             */
-/*   Updated: 2021/04/27 19:34:21 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/05/05 15:53:49 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_two.h"
 
-int			ft_malloc_datas(t_data *data)
+static int	ft_malloc_datas(t_data *data)
 {
 	int	i;
 

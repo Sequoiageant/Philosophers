@@ -6,7 +6,7 @@
 /*   By: julnolle <julnolle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 11:20:45 by julnolle          #+#    #+#             */
-/*   Updated: 2021/05/04 18:56:59 by julnolle         ###   ########.fr       */
+/*   Updated: 2021/05/05 15:52:29 by julnolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	*d_thread(void *arg)
 				ft_print_state(i + 1, DIE, data);
 				return (NULL);
 			}
-			i++;
+			++i;
 		}
 		usleep(2000);
 	}
