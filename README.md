@@ -3,7 +3,9 @@ Multi-threading introduction by "Dining philosophers problem" solving
 
 nbr_of_philosopher time_to_die time_to_eat time_to_sleep [max_meal]
 
-Testings:
+## Testings:
+
+To count the nbr of meals taken be all philosophers: 
 ./philo_one 200 410 200 200 1 | grep "is eating" | wc -l
 
 Nbdy die :
@@ -20,3 +22,8 @@ Nbdy die :
  3 310 200 100
  4 100 200 200
  4 310 200 100
+
+Limit Values:
+200 410 200 200 --> nbdy die
+2 310 200 200 --> death display must be < 10ms
+2 100 60 60
